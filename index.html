@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     
     <script>
-        // Si l'adresse actuelle contient "n-da-42.github.io", on redirige vers le vrai site
         if (window.location.hostname.includes('n-da-42.github.io')) {
             window.location.replace("https://cleanmathis-nettoyage.fr" + window.location.pathname + window.location.search);
         }
@@ -135,7 +134,6 @@
         .cta-section {
              background-color: var(--light-color);
              padding: 60px;
-             /* MODIFIÉ : Assure le centrage horizontal et gère la marge supérieure */
              margin: -80px auto 0 auto;
              position: relative;
              z-index: 10;
@@ -196,7 +194,7 @@
         
         .slider-container {
             position: relative;
-            max-width: 600px; /* Largeur réduite pour un meilleur affichage vertical */
+            max-width: 600px;
             margin: 0 auto;
             border-radius: 16px;
             overflow: hidden;
@@ -206,7 +204,6 @@
         .slider {
             position: relative;
             width: 100%;
-            /* MODIFIÉ : Ratio d'aspect 4:5 (plus haut que large) pour les photos verticales */
             padding-bottom: 125%; 
             background-color: #eee; 
         }
@@ -295,91 +292,7 @@
         }
         
         /* ================================================
-           6. AVIS CLIENTS SECTION
-           ================================================ */
-        .reviews-section {
-            background: var(--light-color);
-        }
-        
-        .reviews-layout {
-            display: grid;
-            grid-template-columns: 300px 1fr;
-            gap: 60px;
-            align-items: center;
-        }
-
-        .reviews-summary {
-            background: var(--background-color);
-            padding: 30px;
-            border-radius: 16px;
-            text-align: center;
-        }
-        
-        .summary-score .score-value {
-            font-family: 'Poppins', sans-serif;
-            font-size: 4rem;
-            font-weight: 800;
-            color: var(--secondary-color);
-        }
-
-        .summary-score .stars {
-            color: var(--star-color);
-            font-size: 1.5rem;
-            margin: 5px 0;
-        }
-
-        .summary-bars { margin-top: 20px; }
-        .rating-bar-container { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
-        .rating-bar-label { width: 60px; font-size: 0.9rem; color: #555; }
-        .rating-bar-label .fa-star { color: var(--star-color); }
-        .rating-bar { flex-grow: 1; height: 8px; background-color: #e9ecef; border-radius: 4px; overflow: hidden; }
-        .rating-bar-fill { height: 100%; background-color: var(--star-color); border-radius: 4px; transition: width 0.5s ease-in-out; }
-
-        .reviews-content {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .review-actions-filters {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-            flex-wrap: wrap;
-            gap: 15px;
-        }
-
-        .review-filters { display: flex; gap: 10px; }
-        .filter-btn { background-color: #e9ecef; border: none; padding: 8px 18px; border-radius: 20px; cursor: pointer; font-weight: 500; transition: all 0.2s ease; font-family: 'Roboto', sans-serif; }
-        .filter-btn.active, .filter-btn:hover { background-color: var(--secondary-color); color: white; }
-        
-        .btn-primary { background-color: var(--primary-color); color: var(--light-color); padding: 12px 25px; border: none; border-radius: 50px; font-size: 1rem; font-weight: 500; cursor: pointer; transition: all 0.3s ease; box-shadow: var(--shadow-sm); }
-        .btn-primary:hover { background-color: var(--primary-hover-color); transform: translateY(-2px); box-shadow: var(--shadow-md); }
-
-        #reviews-container .review-card {
-            background-color: #fff;
-            border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 20px;
-            animation: fadeIn 0.5s ease-out;
-            box-shadow: var(--shadow-sm);
-        }
-        /* ... Styles des avis (header, avatar, etc.) ... */
-        .review-header { display: flex; align-items: flex-start; gap: 15px; margin-bottom: 15px; }
-        .review-avatar { width: 45px; height: 45px; border-radius: 50%; background-color: var(--primary-color); color: white; display: flex; align-items: center; justify-content: center; font-weight: 600; font-size: 1.2rem; flex-shrink: 0; }
-        .review-meta { flex-grow: 1; }
-        .review-author { font-weight: 700; margin: 0; font-family: 'Poppins', sans-serif; }
-        .review-rating .fa-star { color: var(--star-color); }
-        .review-rating .fa-star.empty { color: #dee2e6; }
-        .review-date { font-size: 0.85rem; color: #888; }
-        .review-body p { margin: 0; color: #444; }
-        .review-photos { display: flex; gap: 10px; margin-top: 15px; }
-        .review-photos img { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; cursor: pointer; transition: transform 0.2s ease; }
-        .review-photos img:hover { transform: scale(1.05); }
-
-        /* ================================================
-           7. FOOTER
+           7. FOOTER (Anciennement 7, maintenant 6 vu qu'on a enlevé les avis)
            ================================================ */
         footer {
             text-align: center;
@@ -425,29 +338,12 @@
         .service-block p.price { font-size: 2.2rem; font-weight: 800; margin-top: 25px; font-family: 'Poppins', sans-serif; }
         #custom-block { padding: 20px 40px 40px; text-align: center; }
 
-        /* ... Styles de la modale d'avis ... */
-        #review-form-modal .modal-content { max-width: 550px; }
-        #review-form-title { text-align:center; color: var(--secondary-color); padding: 30px 20px 10px; font-size: 1.8rem; }
-        #review-form { padding: 20px 40px 40px; }
-        .form-group { margin-bottom: 20px; }
-        #review-form label { display: block; font-weight: 500; margin-bottom: 8px; color: #333; }
-        #review-form input[type="text"], #review-form textarea { width: 100%; padding: 12px; border: 1px solid #ccc; border-radius: 8px; box-sizing: border-box; font-family: 'Roboto', sans-serif; transition: border-color 0.2s, box-shadow 0.2s; }
-        #review-form input:focus, #review-form textarea:focus { border-color: var(--primary-color); box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25); outline: none; }
-        .star-rating-input { font-size: 2.5rem; color: #dee2e6; }
-        .star-rating-input .fa-star { cursor: pointer; transition: color 0.2s; }
-        .star-rating-input .fa-star:hover, .star-rating-input .fa-star.selected { color: var(--star-color); }
-        .submit-btn { display: block; width: 100%; padding: 15px; border: none; border-radius: 8px; background: var(--primary-color); color: white; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
-        .submit-btn:hover { background: var(--primary-hover-color); transform: scale(1.02); }
-
-
         /* ================================================
            9. ANIMATIONS & RESPONSIVE
            ================================================ */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         @media (max-width: 992px) {
-            .reviews-layout { grid-template-columns: 1fr; }
-            .reviews-summary { max-width: 500px; margin: 0 auto 40px auto; }
             .service-blocks { flex-wrap: wrap; }
             .service-block { flex-basis: calc(50% - 10px); }
         }
@@ -534,41 +430,7 @@
         </div>
     </section>
 
-    <section class="reviews-section">
-        <div class="container">
-            <h2 class="section-title">L'avis de nos clients</h2>
-            <p class="section-subtitle">La satisfaction de nos clients est notre meilleure publicité. Découvrez ce qu'ils pensent de nos services.</p>
-            <div class="reviews-layout">
-                <div class="reviews-summary">
-                    <div class="summary-score">
-                        <div id="average-rating-value" class="score-value">0.0</div>
-                        <div id="average-rating-stars" class="stars"></div>
-                        <div id="total-reviews-count" class="review-count">0 avis</div>
-                    </div>
-                    <div class="summary-bars">
-                        <div class="rating-bar-container"><div class="rating-bar-label">5 <i class="fa-solid fa-star"></i></div><div class="rating-bar"><div id="rating-bar-5" class="rating-bar-fill"></div></div></div>
-                        <div class="rating-bar-container"><div class="rating-bar-label">4 <i class="fa-solid fa-star"></i></div><div class="rating-bar"><div id="rating-bar-4" class="rating-bar-fill"></div></div></div>
-                        <div class="rating-bar-container"><div class="rating-bar-label">3 <i class="fa-solid fa-star"></i></div><div class="rating-bar"><div id="rating-bar-3" class="rating-bar-fill"></div></div></div>
-                        <div class="rating-bar-container"><div class="rating-bar-label">2 <i class="fa-solid fa-star"></i></div><div class="rating-bar"><div id="rating-bar-2" class="rating-bar-fill"></div></div></div>
-                        <div class="rating-bar-container"><div class="rating-bar-label">1 <i class="fa-solid fa-star"></i></div><div class="rating-bar"><div id="rating-bar-1" class="rating-bar-fill"></div></div></div>
-                    </div>
-                </div>
-                <div class="reviews-content">
-                    <div class="review-actions-filters">
-                        <div class="review-filters">
-                            <button class="filter-btn active" data-filter="all">Tous</button>
-                            <button class="filter-btn" data-filter="positive">Positifs</button>
-                            <button class="filter-btn" data-filter="negative">Négatifs</button>
-                        </div>
-                        <button id="open-review-form-btn" class="btn-primary">Donner son avis</button>
-                    </div>
-                    <div id="reviews-container">
-                        </div>
-                </div>
-            </div>
-        </div>
-    </section>
-</main>
+    </main>
 
 <footer>
     &copy; 2025 Clean Mathis. Tous droits réservés.
@@ -589,23 +451,7 @@
     </div>
 </div>
 
-<div id="review-form-modal" class="modal">
-    <div class="modal-content">
-        <span class="close-button">&times;</span>
-        <h2 id="review-form-title">Votre avis nous intéresse</h2>
-        <form id="review-form">
-            <div class="form-group"><label for="author-name">Votre nom</label><input type="text" id="author-name" name="author-name" required></div>
-            <div class="form-group"><label>Votre note</label><div class="star-rating-input" data-rating="0"><i class="fa-solid fa-star" data-value="1"></i><i class="fa-solid fa-star" data-value="2"></i><i class="fa-solid fa-star" data-value="3"></i><i class="fa-solid fa-star" data-value="4"></i><i class="fa-solid fa-star" data-value="5"></i></div></div>
-            <div class="form-group"><label for="review-comment">Votre commentaire</label><textarea id="review-comment" name="review-comment" rows="4" required></textarea></div>
-            <button type="submit" class="submit-btn">Envoyer mon avis</button>
-        </form>
-    </div>
-</div>
-
-
 <script>
-// Le code JavaScript reste identique à la version précédente car il est déjà conçu
-// pour être flexible et s'adapter aux changements de CSS et de contenu.
 document.addEventListener("DOMContentLoaded", function() {
 
     // =================================================================
@@ -624,7 +470,7 @@ document.addEventListener("DOMContentLoaded", function() {
     initScrollAnimations();
     initSlider();
     initTarifsModal();
-    initReviewsSystem();
+    // initReviewsSystem() SUPPRIMÉ
 
     // =================================================================
     // MODULE: ANIMATIONS AU DÉFILEMENT
@@ -761,121 +607,7 @@ document.addEventListener("DOMContentLoaded", function() {
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
     }
 
-    // =================================================================
-    // MODULE: SYSTÈME D'AVIS CLIENTS
-    // =================================================================
-    function initReviewsSystem() {
-        let reviews = [];
-        const container = document.getElementById('reviews-container');
-        const modal = document.getElementById('review-form-modal');
-        const openBtn = document.getElementById('open-review-form-btn');
-        const closeBtn = modal.querySelector('.close-button');
-        const form = document.getElementById('review-form');
-        const starRatingInput = modal.querySelector('.star-rating-input');
-        const stars = starRatingInput.querySelectorAll('.fa-star');
-        const filterBtns = document.querySelectorAll('.filter-btn');
-
-        const saveToLocalStorage = () => localStorage.setItem('cleanMathisReviews', JSON.stringify(reviews));
-        const loadFromLocalStorage = () => reviews = JSON.parse(localStorage.getItem('cleanMathisReviews') || '[]');
-
-        const renderStars = (rating) => Array.from({length: 5}, (_, i) => `<i class="fa-solid fa-star ${i < rating ? '' : 'empty'}"></i>`).join('');
-
-        const renderReviews = (filter = 'all') => {
-            const filtered = reviews.filter(r => {
-                if (filter === 'positive') return r.rating >= 4;
-                if (filter === 'negative') return r.rating <= 2;
-                return true;
-            }).sort((a, b) => new Date(b.date) - new Date(a.date));
-
-            if (filtered.length === 0) {
-                container.innerHTML = '<p style="text-align:center; color:#888;">Aucun avis pour le moment. Soyez le premier !</p>';
-            } else {
-                container.innerHTML = filtered.map(review => `
-                    <div class="review-card">
-                        <div class="review-header">
-                            <div class="review-avatar">${review.author.charAt(0).toUpperCase()}</div>
-                            <div class="review-meta">
-                                <p class="review-author">${review.author}</p>
-                                <div class="review-rating" title="${review.rating}/5">
-                                    ${renderStars(review.rating)}
-                                    <span class="review-date">${new Date(review.date).toLocaleDateString('fr-FR')}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="review-body"><p>${review.comment}</p></div>
-                    </div>
-                `).join('');
-            }
-            updateSummary();
-        };
-        
-        const updateSummary = () => {
-            const total = reviews.length;
-            const avg = total > 0 ? reviews.reduce((sum, r) => sum + r.rating, 0) / total : 0;
-            
-            document.getElementById('average-rating-value').textContent = avg.toFixed(1);
-            document.getElementById('average-rating-stars').innerHTML = renderStars(Math.round(avg));
-            document.getElementById('total-reviews-count').textContent = `${total} avis`;
-
-            for(let i = 1; i <= 5; i++) {
-                const count = reviews.filter(r => r.rating === i).length;
-                const percentage = total > 0 ? (count / total) * 100 : 0;
-                document.getElementById(`rating-bar-${i}`).style.width = `${percentage}%`;
-            }
-        };
-
-        const openModal = () => modal.classList.add('active');
-        const closeModal = () => {
-            modal.classList.remove('active');
-            form.reset();
-            starRatingInput.dataset.rating = 0;
-            stars.forEach(s => s.classList.remove('selected'));
-        };
-
-        openBtn.addEventListener('click', openModal);
-        closeBtn.addEventListener('click', closeModal);
-        modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
-        document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && modal.classList.contains('active')) closeModal(); });
-
-        stars.forEach(star => {
-            const ratingValue = star.dataset.value;
-            star.addEventListener('mouseover', () => stars.forEach(s => s.classList.toggle('selected', s.dataset.value <= ratingValue)));
-            star.addEventListener('mouseout', () => {
-                const currentRating = starRatingInput.dataset.rating;
-                stars.forEach(s => s.classList.toggle('selected', s.dataset.value <= currentRating));
-            });
-            star.addEventListener('click', () => starRatingInput.dataset.rating = ratingValue);
-        });
-
-        form.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const newReview = {
-                author: form.elements['author-name'].value.trim(),
-                rating: parseInt(starRatingInput.dataset.rating, 10),
-                comment: form.elements['review-comment'].value.trim(),
-                date: new Date().toISOString()
-            };
-
-            if (!newReview.rating) return alert("Veuillez sélectionner une note.");
-            if (!newReview.author || !newReview.comment) return alert("Veuillez remplir tous les champs.");
-
-            reviews.push(newReview);
-            saveToLocalStorage();
-            renderReviews(document.querySelector('.filter-btn.active').dataset.filter);
-            closeModal();
-        });
-
-        filterBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                filterBtns.forEach(b => b.classList.remove('active'));
-                btn.classList.add('active');
-                renderReviews(btn.dataset.filter);
-            });
-        });
-
-        loadFromLocalStorage();
-        renderReviews();
-    }
+    // Le module "SYSTÈME D'AVIS CLIENTS" a été entièrement retiré.
 });
 </script>
 </body>
