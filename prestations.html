@@ -2,8 +2,8 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>Clean Mathis - Accueil</title>
-    <link rel="icon" type="image/png" href="favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Mathis - Prestations</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,7 +20,7 @@
             <a href="prestations.html" class="active">Prestations</a>
             <a href="tarifs.html">Tarifs</a>
             <a href="photos.html">Photos</a>
-            <a href="index.html#contact">Contact</a>
+            <a href="#" onclick="openModal(event)">Contact</a>
         </div>
     </nav>
 
@@ -64,10 +64,49 @@
             
             <div class="centered-content" style="margin-top: 50px;">
                 <p>Besoin d'un devis précis ?</p>
-                <a href="index.html#contact" class="btn-warm">Nous Contacter</a>
+                <a href="#" onclick="openModal(event)" class="btn-warm">Nous Contacter</a>
             </div>
         </section>
     </main>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <h2>Contactez-nous</h2>
+            <p>Nous vous répondrons dans les plus brefs délais.</p>
+            
+            <div class="modal-info">
+                <i class="fas fa-phone-alt"></i> 06 51 64 90 49
+            </div>
+            <div class="modal-info">
+                <i class="fas fa-envelope"></i> cleanmathis@gmail.com
+            </div>
+            
+            <a href="tel:0651649049" class="btn-warm" style="margin-top: 20px;">Appeler Maintenant</a>
+        </div>
+    </div>
+
+    <script>
+        // Fonction pour ouvrir
+        function openModal(e) {
+            if(e) e.preventDefault(); // Empêche le lien de remonter la page
+            document.getElementById('contact-modal').style.display = 'block';
+        }
+
+        // Fonction pour fermer
+        function closeModal() {
+            document.getElementById('contact-modal').style.display = 'none';
+        }
+
+        // Fermer si on clique en dehors de la boîte (sur le fond sombre)
+        window.onclick = function(event) {
+            const modal = document.getElementById('contact-modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
 
 </body>
 </html>
