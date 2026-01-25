@@ -335,3 +335,4 @@ document.querySelectorAll('.nav-links a').forEach(link => {
         document.querySelector('.nav-links').classList.remove('active-menu');
     });
 });
+
