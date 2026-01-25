@@ -18,34 +18,55 @@ if (skipIntro) {
     window.scrollTo(0, 0);
 }
 
-// --- BASE DE DONNÉES GAGA XXL (Top 250+ France) ---
+// --- BASE DE DONNÉES GAGA XXL (REFERENCEMENT MASSIF) ---
 const carDB = {
     citadine: [
-        'clio', 'twingo', 'zoe', 'modus', 'wind', 'r5', 'sandero', 'spring',
-        '208', '207', '206', '108', '107', '106', '205', 'ion', 'c3', 'c2', 'c1', 'ds3', 'ami', 'saxo', 'c-zero',
-        'polo', 'up', 'lupo', 'fox', 'fabia', 'citigo', 'ibiza', 'mii', 'a1', 'a2',
-        '500', 'fiat 500', 'panda', 'punto', 'tipo', 'mito', 'ypsilon',
-        'fiesta', 'ka', 'corsa', 'adam', 'karl', 'agila',
-        'yaris', 'aygo', 'iq', 'micra', 'swift', 'ignis', 'alto', 'celerio', 'splash', 'picanto', 'rio', 'i10', 'i20', 'jazz', 'colt', 'space star', 'mazda 2',
-        'mini', 'mini cooper', 'smart', 'fortwo', 'forfour'
+        // RENAULT / DACIA / ALPINE
+        'clio', 'clio 1', 'clio 2', 'clio 3', 'clio 4', 'clio 5', 'twingo', 'twingo 1', 'twingo 2', 'twingo 3', 'zoe', 'modus', 'grand modus', 'wind', 'r5', 'super 5', 'sandero', 'sandero stepway', 'spring', 'logan', 'a110',
+        // PEUGEOT / CITROEN / DS
+        '208', 'e-208', '207', '207 cc', '207 sw', '206', '206 cc', '206+', '108', '107', '106', '1007', '205', 'ion', 'c3', 'c3 pluriel', 'c2', 'c1', 'ds3', 'ds 3', 'ami', 'saxo', 'ax', 'c-zero', 'e-mehari',
+        // VW GROUP (VW, SEAT, SKODA, AUDI)
+        'polo', 'up', 'e-up', 'lupo', 'fox', 'fabia', 'citigo', 'felicia', 'ibiza', 'mii', 'arosa', 'a1', 'a2', 's1',
+        // FIAT / ALFA / LANCIA / ABARTH
+        '500', 'fiat 500', '500e', '500c', 'panda', 'punto', 'grande punto', 'punto evo', 'tipo', 'bravo', 'brava', 'stilo', 'mito', 'ypsilon', 'seicento', 'cinquecento', 'abarth 500', 'abarth 595', 'abarth 695',
+        // FORD / OPEL
+        'fiesta', 'ka', 'ka+', 'streetka', 'corsa', 'corsa-e', 'adam', 'karl', 'agila', 'tigra', 'tigra twintop',
+        // TOYOTA / ASIATIQUES
+        'yaris', 'yaris gr', 'aygo', 'aygo x', 'iq', 'starlet', 'micra', 'pixo', 'cube', 'swift', 'swift sport', 'ignis', 'alto', 'celerio', 'splash', 'baleno', 'picanto', 'rio', 'i10', 'i20', 'getz', 'atos', 'jazz', 'honda e', 'logo', 'colt', 'space star', 'mazda 2', 'demio', 'sirion', 'trevis', 'cuore',
+        // PREMIUM / AUTRES
+        'mini', 'mini cooper', 'mini one', 'mini cabrio', 'smart', 'fortwo', 'forfour', 'roadster'
     ],
     berline: [
-        'megane', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane',
-        '308', '307', '306', '408', '508', '407', '406', '607', 'c4', 'c5', 'ds4', 'ds5', 'xsara', 'xantia', 'c-elysee', 'ds 4', 'ds 9',
-        'golf', 'passat', 'arteon', 'jetta', 'bora', 'scirocco', 'beetle', 'coccinelle', 'id.3', 'leon', 'toledo', 'exeo', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'a4', 'a5', 'a6', 'a7', 'tt',
-        'serie 1', 'serie 2', 'serie 3', 'serie 4', 'serie 5', 'classe a', 'classe c', 'classe e', 'cla', 'cls', 'classe b',
-        'focus', 'mondeo', 'astra', 'insignia', 'vectra',
-        'corolla', 'auris', 'prius', 'avensis', 'camry', 'civic', 'accord', 'mazda 3', 'mazda 6', 'impreza', 'ceed', 'proced', 'i30', 'ioniq', 'elantra', 'i40', 'optima', 'stinger', 'pulsar', 'leaf',
-        'model 3', 'model s', 'giulia', '147', '159', 'delta', 'xe', 'xf'
+        // RENAULT / DACIA
+        'megane', 'megane e-tech', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane', 'vel satis', 'logan mcv',
+        // PEUGEOT / CITROEN / DS
+        '308', 'e-308', '307', '307 cc', '306', '408', '508', '508 pse', '407', '407 coupé', '406', '406 coupé', '607', 'c4', 'e-c4', 'c4 x', 'c5', 'c5 x', 'ds4', 'ds 4', 'ds5', 'ds 5', 'ds 9', 'xsara', 'xantia', 'xm', 'c6', 'c-elysee',
+        // VW GROUP
+        'golf', 'golf gte', 'golf gti', 'golf r', 'passat', 'passat cc', 'arteon', 'jetta', 'bora', 'eos', 'scirocco', 'beetle', 'new beetle', 'coccinelle', 'id.3', 'id.4', 'id.5', 'id.7', 'leon', 'cupra leon', 'toledo', 'exeo', 'cordoba', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'rs3', 's3', 'a4', 'rs4', 's4', 'a5', 'rs5', 's5', 'a6', 'rs6', 's6', 'a7', 'rs7', 's7', 'a8', 's8', 'tt', 'tts', 'ttrs', 'r8',
+        // BMW / MERCEDES
+        'serie 1', 'm1', 'serie 2', 'm2', 'serie 3', 'm3', 'serie 4', 'm4', 'serie 5', 'm5', 'serie 6', 'm6', 'serie 7', 'serie 8', 'm8', 'i3', 'i4', 'i5', 'i7', 'z3', 'z4', 'classe a', 'a35', 'a45', 'classe c', 'c43', 'c63', 'classe e', 'e53', 'e63', 'classe s', 'cla', 'cls', 'clk', 'slk', 'slc', 'sl', 'classe b', 'eqe', 'eqs',
+        // FORD / OPEL
+        'focus', 'focus st', 'focus rs', 'mondeo', 'astra', 'insignia', 'vectra', 'omega', 'calibra', 'gt', 'mustang', 'mach-e',
+        // TOYOTA / ASIATIQUES
+        'corolla', 'auris', 'prius', 'avensis', 'camry', 'mirai', 'supra', 'gt86', 'gr86', 'celica', 'mr2', 'civic', 'type r', 'accord', 'cr-z', 'insight', 'mazda 3', 'mazda 6', 'mx-5', 'rx-8', 'impreza', 'wrx', 'wrx sti', 'levorg', 'brz', 'legacy', 'outback', 'forester', 'ceed', 'proced', 'stinger', 'optima', 'ev6', 'i30', 'i30 n', 'ioniq', 'ioniq 5', 'ioniq 6', 'elantra', 'i40', 'genesis', 'pulsar', 'leaf', '350z', '370z', 'gtr', 'primera', 'almera',
+        // TESLA / LUXE / AUTRES
+        'model 3', 'model s', 'roadster', 'giulia', '147', '156', '159', 'brera', 'gt', 'giulietta', '4c', '8c', 'delta', 'thema', 'lybra', 'xe', 'xf', 'xj', 'f-type', 'xk', 'ghibli', 'quattroporte', 'taycan', 'panamera', 's60', 's90', 'v40', 'v60', 'v90', 'c30', 'c70', 'polestar 2'
     ],
     suv: [
-        'captur', 'arkana', 'austral', 'kadjar', 'koleos', 'scenic', 'espace', 'kangoo', 'duster', 'jogger', 'lodgy', 'dokker',
-        '2008', '3008', '5008', '4008', 'rifter', 'partner', 'berlingo', 'c3 aircross', 'c4 aircross', 'c5 aircross', 'c4 cactus', 'picasso', 'c4 picasso', 'grand c4 picasso', 'c8', 'ds7', 'ds3 crossback', 'ds 3 crossback', 'ds 7',
-        'tiguan', 't-roc', 't-cross', 'touareg', 'touran', 'sharan', 'caddy', 'multivan', 'q2', 'q3', 'q4', 'q5', 'q7', 'q8', 'ateca', 'arona', 'tarraco', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'enyaq', 'cupra formentor',
-        'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'gla', 'glb', 'glc', 'gle', 'glk', 'vito', 'classe v',
-        'kuga', 'puma', 'ecosport', 'edge', 'explorer', 'c-max', 's-max', 'galaxy', 'mokka', 'mokka x', 'crossland', 'grandland', 'zafira', 'meriva', 'antara',
-        'yaris cross', 'c-hr', 'rav4', 'highlander', 'land cruiser', 'bz4x', 'verso', 'qashqai', 'juke', 'x-trail', 'aria', 'tucson', 'kona', 'santa fe', 'bayon', 'sportage', 'niro', 'sorento', 'stonic', 'xceed', 'soul', 'cx-3', 'cx-30', 'cx-5', 'cr-v', 'hr-v', 'vitara', 's-cross', 'jimny',
-        'model y', 'model x', '500x', '500l', 'renegade', 'compass', 'cherokee', 'evoque', 'velar', 'range rover', 'discovery', 'f-pace', 'e-pace', 'stelvio', 'tonale', 'macan', 'cayenne'
+        // RENAULT / DACIA / ALPINE
+        'captur', 'arkana', 'austral', 'rafale', 'symbioz', 'kadjar', 'koleos', 'scenic', 'grand scenic', 'espace', 'kangoo', 'traffic', 'duster', 'jogger', 'lodgy', 'dokker',
+        // PEUGEOT / CITROEN / DS
+        '2008', 'e-2008', '3008', 'e-3008', '5008', 'e-5008', '4008', 'rifter', 'partner', 'traveller', 'expert', 'berlingo', 'spacetourer', 'jumpy', 'c3 aircross', 'c4 aircross', 'c5 aircross', 'c4 cactus', 'picasso', 'c3 picasso', 'c4 picasso', 'grand c4 picasso', 'xsara picasso', 'c8', 'nemo', 'bipper', 'ds7', 'ds3 crossback', 'ds 3 crossback', 'ds 7', 'ds 7 crossback',
+        // VW GROUP
+        'tiguan', 'tiguan allspace', 't-roc', 't-cross', 'touareg', 'taigo', 'touran', 'sharan', 'caddy', 'multivan', 'transporter', 'california', 'amarok', 'q2', 'sq2', 'q3', 'rsq3', 'q3 sportback', 'q4', 'q4 e-tron', 'q5', 'sq5', 'q5 sportback', 'q7', 'sq7', 'q8', 'sq8', 'rsq8', 'e-tron', 'q8 e-tron', 'ateca', 'cupra ateca', 'arona', 'tarraco', 'formentor', 'cupra formentor', 'born', 'tavascan', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'enyaq', 'roomster', 'macan', 'cayenne', 'cayenne coupé', 'urus', 'bentayga',
+        // BMW / MERCEDES
+        'x1', 'ix1', 'x2', 'ix2', 'x3', 'ix3', 'x4', 'x5', 'x6', 'x7', 'xm', 'gla', 'eqa', 'glb', 'eqb', 'glc', 'glc coupé', 'eqc', 'gle', 'gle coupé', 'eqe suv', 'gls', 'eqs suv', 'glk', 'ml', 'g-class', 'classe g', 'vito', 'classe v', 'viano', 'citan',
+        // FORD / OPEL
+        'kuga', 'puma', 'ecosport', 'edge', 'explorer', 'ranger', 'raptor', 'bronco', 'c-max', 'grand c-max', 's-max', 'galaxy', 'tourneo', 'mokka', 'mokka x', 'mokka-e', 'crossland', 'crossland x', 'grandland', 'grandland x', 'zafira', 'zafira tourer', 'zafira life', 'meriva', 'antara', 'vivaro', 'combo', 'frontera',
+        // TOYOTA / ASIATIQUES
+        'yaris cross', 'c-hr', 'rav4', 'highlander', 'land cruiser', 'hilux', 'bz4x', 'corolla cross', 'verso', 'proace', 'qashqai', 'juke', 'x-trail', 'aria', 'pathfinder', 'navara', 'murano', 'tucson', 'kona', 'santa fe', 'bayon', 'nexo', 'staria', 'sportage', 'niro', 'sorento', 'stonic', 'xceed', 'soul', 'ev9', 'cx-3', 'cx-30', 'cx-5', 'cx-60', 'cx-80', 'mx-30', 'cr-v', 'hr-v', 'zr-v', 'e:ny1', 'vitara', 's-cross', 'jimny', 'ignis suv', 'across', 'swace', 'korando', 'rexton', 'tivoli', 'musso',
+        // TESLA / LUXE / AUTRES
+        'model y', 'model x', 'cybertruck', '500x', '500l', '600', '600e', 'doblo', 'qubo', 'freemont', 'multipla', 'ulysse', 'renegade', 'compass', 'cherokee', 'grand cherokee', 'wrangler', 'gladiator', 'avenger', 'evoque', 'velar', 'range rover', 'range rover sport', 'discovery', 'discovery sport', 'defender', 'f-pace', 'e-pace', 'i-pace', 'stelvio', 'tonale', 'levante', 'grecale', 'xc40', 'xc60', 'xc90', 'c40', 'ex30', 'ex90', 'v90 cross country', 'dbx', 'purosangue', 'cullinan'
     ]
 };
 
@@ -274,7 +295,7 @@ function initScrollSystem(shouldFadeIn = false) {
     resizeObserver.observe(document.body);
 }
 
-// FONCTION RECHERCHE VOITURE
+// FONCTION RECHERCHE VOITURE (CORRIGÉE POUR LA NOUVELLE DB)
 function searchCar() {
     const input = document.getElementById('car-input').value.toLowerCase().trim();
     const feedback = document.getElementById('car-feedback');
@@ -287,6 +308,7 @@ function searchCar() {
     let found = null;
     let categoryName = "";
 
+    // On parcourt la grosse base de données
     if(carDB.citadine.some(car => input.includes(car))) { found = 'citadine'; categoryName = "Citadine détectée !"; }
     else if(carDB.berline.some(car => input.includes(car))) { found = 'berline'; categoryName = "Berline détectée !"; }
     else if(carDB.suv.some(car => input.includes(car))) { found = 'suv'; categoryName = "SUV/4x4/Monospace détecté !"; }
