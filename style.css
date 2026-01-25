@@ -18,14 +18,15 @@ body {
     min-height: 100vh;
 }
 
-/* --- NAV --- */
+/* --- NAV DESKTOP --- */
 nav { 
     position: fixed; top: 0; left: 0; right: 0; height: 80px; 
     padding: 0 50px; display: flex; justify-content: space-between; align-items: center; 
-    z-index: 100; opacity: 0; background: rgba(0, 21, 28, 0.95); backdrop-filter: blur(10px);
+    z-index: 1000; /* Z-index augmenté */
+    opacity: 0; background: rgba(0, 21, 28, 0.95); backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.05); transition: 0.3s;
 }
-.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: #fff; text-decoration: none; z-index: 101; }
+.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: #fff; text-decoration: none; z-index: 1001; }
 .logo span { color: var(--primary-orange); }
 
 .nav-links { display: flex; gap: 30px; height: 100%; align-items: center; }
@@ -41,8 +42,8 @@ nav {
 }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
-/* BURGER */
-.burger-menu { display: none; font-size: 1.5rem; color: #fff; cursor: pointer; z-index: 101; }
+/* BURGER CACHÉ SUR ORDI */
+.burger-menu { display: none; }
 
 /* --- HERO --- */
 #hero { 
@@ -59,33 +60,10 @@ nav {
 .scroll-down { margin-top: 80px; opacity: 0; color: var(--primary-orange); font-size: 1.5rem; animation: float 2s infinite; }
 @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(15px); } }
 
-.line-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
-#guide-line { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 1px; }
-#lit-line { fill: none; stroke: var(--primary-orange); stroke-width: 2px; filter: drop-shadow(0 0 5px var(--primary-orange)); }
-
-.glow-orb {
-    width: 10px; height: 10px; background: #fff; border-radius: 50%;
-    position: absolute; top: 0; left: 0; z-index: 50; transform: translate(-50%, -50%);
-    opacity: 0; box-shadow: 0 0 10px 2px #fff, 0 0 20px 10px var(--primary-orange), 0 0 50px 20px rgba(255, 107, 53, 0.3);
-    pointer-events: none;
-}
-
-#loader-overlay {
-    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-    background-color: #000; z-index: 9999; display: flex; align-items: center; justify-content: center;
-}
-.loader-content { position: relative; width: 300px; height: 300px; display: flex; align-items: center; justify-content: center; }
-#loader-text { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 1px; text-transform: uppercase; position: relative; z-index: 2; white-space: nowrap; line-height: 1.1; animation: text-glow 2s ease-in-out infinite alternate; }
-#loader-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 2px solid transparent; border-top-color: var(--primary-orange); border-right-color: var(--primary-orange); animation: spin 1.5s linear infinite; box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); z-index: 1; }
-@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-.clone-element { position: fixed; z-index: 10000; pointer-events: none; margin: 0 !important; padding: 0 !important; transform-origin: center center; box-sizing: border-box; }
-
-/* --- CONTENU --- */
-.reveal-text { opacity: 0; transform: translateY(50px); filter: blur(5px); transition: all 0.8s ease-out; }
-.reveal-text.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
-.warm-highlight { color: var(--primary-orange); text-shadow: 0 0 25px rgba(255, 107, 53, 0.5); font-weight: 700; }
-
+/* --- SECTIONS GÉNÉRALES --- */
+/* Par défaut sur PC : hauteur mini de 100vh */
 section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: column; justify-content: center; position: relative; z-index: 2; }
+
 .text-block { font-size: 2.2rem; max-width: 650px; margin: 80px 0; font-weight: 600; line-height: 1.4; }
 .text-block.left { align-self: flex-start; text-align: left; }
 .text-block.right { align-self: flex-end; text-align: right; }
@@ -94,29 +72,37 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 .centered-content p { font-size: 1.6rem; color: #b0bec5; }
 .section-title { text-align: center; font-size: 3rem; margin-bottom: 80px; text-transform: uppercase; letter-spacing: 2px; }
 
-/* --- CARDS & SERVICES --- */
+/* --- RESTE DU SITE (SVG, CARDS, TARIFS...) --- */
+.line-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 0; }
+#guide-line { fill: none; stroke: rgba(255, 255, 255, 0.05); stroke-width: 1px; }
+#lit-line { fill: none; stroke: var(--primary-orange); stroke-width: 2px; filter: drop-shadow(0 0 5px var(--primary-orange)); }
+.glow-orb { width: 10px; height: 10px; background: #fff; border-radius: 50%; position: absolute; top: 0; left: 0; z-index: 50; transform: translate(-50%, -50%); opacity: 0; box-shadow: 0 0 10px 2px #fff, 0 0 20px 10px var(--primary-orange), 0 0 50px 20px rgba(255, 107, 53, 0.3); pointer-events: none; }
+#loader-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background-color: #000; z-index: 9999; display: flex; align-items: center; justify-content: center; }
+.loader-content { position: relative; width: 300px; height: 300px; display: flex; align-items: center; justify-content: center; }
+#loader-text { font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800; color: #fff; letter-spacing: 1px; text-transform: uppercase; position: relative; z-index: 2; white-space: nowrap; line-height: 1.1; animation: text-glow 2s ease-in-out infinite alternate; }
+#loader-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 2px solid transparent; border-top-color: var(--primary-orange); border-right-color: var(--primary-orange); animation: spin 1.5s linear infinite; box-shadow: 0 0 20px rgba(255, 107, 53, 0.3); z-index: 1; }
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+.clone-element { position: fixed; z-index: 10000; pointer-events: none; margin: 0 !important; padding: 0 !important; transform-origin: center center; box-sizing: border-box; }
+.reveal-text { opacity: 0; transform: translateY(50px); filter: blur(5px); transition: all 0.8s ease-out; }
+.reveal-text.visible { opacity: 1; transform: translateY(0); filter: blur(0); }
+.warm-highlight { color: var(--primary-orange); text-shadow: 0 0 25px rgba(255, 107, 53, 0.5); font-weight: 700; }
 .cards-container { display: grid; grid-template-columns: 1fr 1fr; gap: 50px; }
 .glass-card { background: rgba(255, 255, 255, 0.03); border-top: 1px solid rgba(255,255,255,0.1); padding: 40px; border-radius: 24px; box-shadow: 0 10px 40px rgba(0,0,0,0.2); transition: 0.3s; height: 100%; }
 .glass-card:hover { transform: translateY(-10px); background: rgba(255, 255, 255, 0.05); border-color: var(--primary-orange); }
 .glass-card h3 { color: var(--primary-orange); font-size: 1.8rem; margin-bottom: 15px; }
 .glass-card p { font-size: 1.1rem; color: #cfd8dc; line-height: 1.6; }
-
 .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1200px; margin: 0 auto; }
 .service-item { background: rgba(5, 59, 77, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 20px; width: 200px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(5px); }
 .service-item:hover { background: var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 107, 53, 0.4); border-color: transparent; }
 .service-item:hover i, .service-item:hover h4 { color: #fff; }
 .service-item i { font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 20px; transition: 0.3s; }
 .service-item h4 { font-size: 1.1rem; font-weight: 600; color: #fff; }
-
-/* --- PHOTOS --- */
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px 0; }
 .gallery-item { height: 300px; background-color: #000; border-radius: 15px; overflow: hidden; position: relative; cursor: pointer; transition: 0.3s; border: 1px solid rgba(255,255,255,0.1); }
 .gallery-item img { width: 100%; height: 100%; object-fit: cover; transition: 0.5s; opacity: 0.7; }
 .gallery-item:hover img { transform: scale(1.1); opacity: 1; }
 .gallery-item::after { content: 'Voir'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-weight: bold; opacity: 0; transition: 0.3s; z-index: 2; background: var(--primary-orange); padding: 10px 20px; border-radius: 20px; }
 .gallery-item:hover::after { opacity: 1; }
-
-/* --- CALCULATEUR --- */
 .calculator-container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 .calc-section { background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05); border-radius: 20px; padding: 30px; margin-bottom: 30px; transition: 0.3s; }
 .calc-section h3 { font-size: 1.5rem; color: #fff; margin-bottom: 25px; display: flex; align-items: center; }
@@ -147,8 +133,6 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 .total-content { font-size: 1.5rem; color: #fff; font-weight: 600; }
 .total-price { color: var(--primary-orange); font-size: 2.2rem; margin-left: 15px; font-weight: 800; }
 .btn-warm.small { font-size: 1rem; padding: 12px 30px; }
-
-/* --- CONTACT MODAL --- */
 .contact-card { background: linear-gradient(145deg, #052029, #001014); padding: 80px; border-radius: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); max-width: 800px; margin: 0 auto; }
 .contact-card h2 { font-size: 3rem; margin-bottom: 15px; color: #fff; }
 .btn-warm { display: inline-block; background: var(--primary-orange); color: white; padding: 18px 50px; border-radius: 50px; text-decoration: none; font-weight: 700; font-size: 1.3rem; box-shadow: 0 10px 30px rgba(255, 107, 53, 0.3); transition: 0.3s; cursor: pointer; }
@@ -161,59 +145,66 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 .modal-icon { font-size: 3rem; color: var(--primary-orange); margin-bottom: 20px; }
 .modal-info { margin: 20px 0; font-size: 1.2rem; color: #fff; }
 .modal-info i { margin-right: 10px; color: var(--primary-orange); }
-
 @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 @keyframes slideDown { from {transform: translateY(-50px);} to {transform: translateY(0);} }
 @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
 
-/* --- RESPONSIVE MOBILE OPTIMISÉ --- */
+/* --- RESPONSIVE MOBILE OPTIMISÉ (POUR TON TÉLÉPHONE) --- */
 @media (max-width: 768px) {
-    /* Nav réduite et propre */
+    /* 1. Nav réduite et Burger Visible */
     nav { height: 60px; padding: 0 20px; background: rgba(0, 21, 28, 0.98); }
     .logo { font-size: 1.2rem; }
-    .burger-menu { display: block; font-size: 1.4rem; }
+    .burger-menu { display: block !important; font-size: 1.5rem; color: #fff; cursor: pointer; }
 
-    /* Menu Full Screen */
+    /* 2. Menu Déroulant Mobile */
     .nav-links {
-        position: fixed; top: 60px; right: -100%;
-        width: 100%; height: calc(100vh - 60px);
+        position: fixed; 
+        top: 60px; 
+        right: -100%; /* Caché par défaut */
+        width: 100%; 
+        height: calc(100vh - 60px);
         background: #00151c;
-        flex-direction: column; justify-content: start; padding-top: 50px;
-        transition: 0.3s ease-in-out; border-top: 1px solid rgba(255,255,255,0.1);
+        flex-direction: column; 
+        justify-content: flex-start;
+        padding-top: 50px;
+        transition: 0.3s ease-in-out; 
+        border-top: 1px solid rgba(255,255,255,0.1);
+        display: flex; /* Force le flex même si c'était caché */
     }
-    .nav-links.active-menu { right: 0; }
-    .nav-links a { font-size: 1.4rem; margin: 15px 0; height: auto; }
+    .nav-links.active-menu { right: 0; /* Apparaît quand on clique */ }
+    .nav-links a { font-size: 1.4rem; margin: 15px 0; height: auto; display: block; width: 100%; text-align: center; }
+    .nav-links a::after { display: none; }
 
-    /* Réduction des espaces (Plus d'air inutile) */
-    section { padding: 40px 20px; min-height: auto; } /* Plus de min-height qui force le scroll */
-    #hero { height: 100vh; padding: 0 10px; } /* Sauf le hero */
+    /* 3. Réduction des espaces (Fini les trous !) */
+    /* On enlève le min-height 100vh qui force les grands espaces */
+    section { min-height: auto !important; padding: 40px 20px; } 
+    #hero { min-height: 100dvh; padding: 0 10px; } /* Sauf le hero */
     
-    /* Textes plus petits */
-    #hero h1.main-title { font-size: 2.5rem; margin-bottom: 10px; white-space: normal; }
-    .subtitle-hero { font-size: 1rem; }
-    .text-block { font-size: 1.2rem; margin: 30px 0; text-align: center !important; }
-    .section-title { font-size: 2rem; margin-bottom: 40px; }
+    /* 4. Textes ajustés */
+    #hero h1.main-title { font-size: 2.5rem; margin-bottom: 10px; white-space: normal; line-height: 1.1; }
+    .subtitle-hero { font-size: 1rem; padding: 0 10px; }
+    .text-block { font-size: 1.2rem; margin: 20px 0; text-align: center !important; }
+    .section-title { font-size: 2rem; margin-bottom: 30px; }
+    .centered-content h2 { font-size: 1.8rem; }
+    .centered-content p { font-size: 1.1rem; }
     
-    /* Cards compactes */
+    /* 5. Éléments compacts */
     .cards-container { grid-template-columns: 1fr; gap: 20px; }
-    .glass-card { padding: 25px; }
-    .glass-card h3 { font-size: 1.5rem; }
+    .glass-card { padding: 20px; }
+    .glass-card h3 { font-size: 1.4rem; }
     
-    /* Prestations & Tarifs */
+    /* Grilles sur une colonne */
     .services-grid, .pricing-grid, .options-grid { grid-template-columns: 1fr; gap: 15px; }
-    .service-item, .option-card { width: 100%; max-width: 100%; padding: 20px; }
+    .service-item, .option-card { width: 100%; max-width: 100%; padding: 15px; }
     
-    /* Calculateur */
-    .calc-section { padding: 20px; margin-bottom: 20px; }
-    .calc-section h3 { font-size: 1.2rem; }
-    .vehicle-search-wrapper { margin-bottom: 20px; }
+    /* Barre Total Mobile */
+    .total-bar { flex-direction: column; gap: 10px; padding: 15px; bottom: 0; }
+    .total-price { font-size: 1.8rem; margin: 0; }
+    .btn-warm.small { width: 100%; text-align: center; }
     
-    /* Total Bar plus petite */
-    .total-bar { padding: 10px 20px; flex-direction: row; justify-content: space-between; gap: 10px; }
-    .total-content { font-size: 1rem; display: flex; flex-direction: column; align-items: flex-start; }
-    .total-price { font-size: 1.4rem; margin-left: 0; }
-    .btn-warm.small { font-size: 0.9rem; padding: 8px 15px; }
+    /* Modal */
+    .modal-content { width: 95%; margin: 15% auto; padding: 25px 15px; }
     
-    /* Ajustement Main Padding pour éviter que le menu cache le titre */
-    main { padding-top: 80px !important; }
+    /* Marge haut pour éviter que le contenu passe sous le menu */
+    main { padding-top: 70px !important; }
 }
