@@ -4,6 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Clean Mathis - Tarifs & Devis</title>
+    
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="apple-touch-icon" href="favicon.png">
+
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="style.css">
@@ -161,11 +165,10 @@
     </div>
 
     <script>
-        // --- BASE DE DONNÉES VOITURES (GAGA DB) ---
         const carDB = {
-            citadine: ['clio', '208', 'c3', 'twingo', '500', 'fiat 500', 'polo', 'fiesta', 'yaris', 'zoe', 'sandero', 'micra', 'ibiza', 'fabia', 'corsa', 'i20', 'swift', 'a1', 'mini'],
-            berline: ['golf', '308', 'megane', 'a3', 'serie 1', 'classe a', 'leon', 'focus', 'astra', 'c4', 'octavia', 'model 3', 'civic', 'corolla', 'tipo', 'i30', 'ceed', 'serie 3', 'classe c', 'a4', 'passat', '508', 'talisman'],
-            suv: ['3008', '2008', 'captur', 'duster', 'tiguan', 't-roc', 'q3', 'x1', 'gla', 'x3', 'q5', 'kadjar', 'arkana', 'sportage', 'tucson', 'c5 aircross', 'ds7', 'model y', 'rav4', 'kuga', 'xc40', 'xc60', 'macan', 'cayenne', 'range rover']
+            citadine: ['clio', 'twingo', 'zoe', 'modus', 'wind', 'r5', 'sandero', 'spring', '208', '207', '206', '108', '107', '106', '205', 'ion', 'c3', 'c2', 'c1', 'ds3', 'ami', 'saxo', 'c-zero', 'polo', 'up', 'lupo', 'fox', 'fabia', 'citigo', 'ibiza', 'mii', 'a1', 'a2', '500', 'fiat 500', 'panda', 'punto', 'tipo', 'mito', 'ypsilon', 'fiesta', 'ka', 'corsa', 'adam', 'karl', 'agila', 'yaris', 'aygo', 'iq', 'micra', 'swift', 'ignis', 'alto', 'celerio', 'splash', 'picanto', 'rio', 'i10', 'i20', 'jazz', 'colt', 'space star', 'mazda 2', 'mini', 'mini cooper', 'smart', 'fortwo', 'forfour'],
+            berline: ['megane', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane', '308', '307', '306', '408', '508', '407', '406', '607', 'c4', 'c5', 'ds4', 'ds5', 'xsara', 'xantia', 'c-elysee', 'ds 4', 'ds 9', 'golf', 'passat', 'arteon', 'jetta', 'bora', 'scirocco', 'beetle', 'coccinelle', 'id.3', 'leon', 'toledo', 'exeo', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'a4', 'a5', 'a6', 'a7', 'tt', 'serie 1', 'serie 2', 'serie 3', 'serie 4', 'serie 5', 'classe a', 'classe c', 'classe e', 'cla', 'cls', 'classe b', 'focus', 'mondeo', 'astra', 'insignia', 'vectra', 'corolla', 'auris', 'prius', 'avensis', 'camry', 'civic', 'accord', 'mazda 3', 'mazda 6', 'impreza', 'ceed', 'proced', 'i30', 'ioniq', 'elantra', 'i40', 'optima', 'stinger', 'pulsar', 'leaf', 'model 3', 'model s', 'giulia', '147', '159', 'delta', 'xe', 'xf'],
+            suv: ['captur', 'arkana', 'austral', 'kadjar', 'koleos', 'scenic', 'espace', 'kangoo', 'duster', 'jogger', 'lodgy', 'dokker', '2008', '3008', '5008', '4008', 'rifter', 'partner', 'berlingo', 'c3 aircross', 'c4 aircross', 'c5 aircross', 'c4 cactus', 'picasso', 'c4 picasso', 'grand c4 picasso', 'c8', 'ds7', 'ds3 crossback', 'ds 3 crossback', 'ds 7', 'tiguan', 't-roc', 't-cross', 'touareg', 'touran', 'sharan', 'caddy', 'multivan', 'q2', 'q3', 'q4', 'q5', 'q7', 'q8', 'ateca', 'arona', 'tarraco', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'enyaq', 'cupra formentor', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'gla', 'glb', 'glc', 'gle', 'glk', 'vito', 'classe v', 'kuga', 'puma', 'ecosport', 'edge', 'explorer', 'c-max', 's-max', 'galaxy', 'mokka', 'mokka x', 'crossland', 'grandland', 'zafira', 'meriva', 'antara', 'yaris cross', 'c-hr', 'rav4', 'highlander', 'land cruiser', 'bz4x', 'verso', 'qashqai', 'juke', 'x-trail', 'aria', 'tucson', 'kona', 'santa fe', 'bayon', 'sportage', 'niro', 'sorento', 'stonic', 'xceed', 'soul', 'cx-3', 'cx-30', 'cx-5', 'cr-v', 'hr-v', 'vitara', 's-cross', 'jimny', 'model y', 'model x', '500x', '500l', 'renegade', 'compass', 'cherokee', 'evoque', 'velar', 'range rover', 'discovery', 'f-pace', 'e-pace', 'stelvio', 'tonale', 'macan', 'cayenne']
         };
 
         function searchCar() {
@@ -180,25 +183,20 @@
             let found = null;
             let categoryName = "";
 
-            // Recherche
             if(carDB.citadine.some(car => input.includes(car))) { found = 'citadine'; categoryName = "Citadine détectée !"; }
             else if(carDB.berline.some(car => input.includes(car))) { found = 'berline'; categoryName = "Berline détectée !"; }
-            else if(carDB.suv.some(car => input.includes(car))) { found = 'suv'; categoryName = "SUV/4x4 détecté !"; }
+            else if(carDB.suv.some(car => input.includes(car))) { found = 'suv'; categoryName = "SUV/4x4/Monospace détecté !"; }
 
             if(found) {
-                // Feedback visuel
                 feedback.innerHTML = `<span style="color:#4caf50; font-weight:bold;">✨ ${categoryName}</span>`;
-                
-                // Clic automatique
                 if(found === 'citadine') document.getElementById('default-vehicle').click();
                 if(found === 'berline') document.getElementById('btn-berline').click();
                 if(found === 'suv') document.getElementById('btn-suv').click();
             } else {
-                feedback.innerHTML = "<span style='color:#aaa;'>Modèle inconnu, veuillez sélectionner manuellement ci-dessous.</span>";
+                feedback.innerHTML = "<span style='color:#aaa;'>Modèle non reconnu, sélectionnez manuellement ci-dessous.</span>";
             }
         }
 
-        // --- RESTE DU JS CALCULATEUR ---
         const prices = {
             cleaning: {
                 basic: { int: 45, ext: 35, pack: 75 },
