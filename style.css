@@ -18,14 +18,14 @@ body {
     min-height: 100vh;
 }
 
-/* --- NAV --- */
+/* --- NAV & BURGER MENU --- */
 nav { 
     position: fixed; top: 0; left: 0; right: 0; height: 80px; 
     padding: 0 50px; display: flex; justify-content: space-between; align-items: center; 
     z-index: 100; opacity: 0; background: rgba(0, 21, 28, 0.95); backdrop-filter: blur(10px);
     border-bottom: 1px solid rgba(255,255,255,0.05);
 }
-.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: #fff; text-decoration: none; }
+.logo { font-weight: 800; font-size: 1.5rem; letter-spacing: 1px; color: #fff; text-decoration: none; z-index: 101; }
 .logo span { color: var(--primary-orange); }
 
 .nav-links { display: flex; gap: 30px; height: 100%; align-items: center; }
@@ -41,13 +41,18 @@ nav {
 }
 .nav-links a:hover::after, .nav-links a.active::after { width: 100%; }
 
+/* Style du bouton Burger (Caché sur PC, visible sur Mobile) */
+.burger-menu {
+    display: none; font-size: 1.8rem; color: #fff; cursor: pointer; z-index: 101;
+}
+
 /* --- HERO & ANIMATIONS --- */
 #hero { 
     height: 100vh; width: 100%; display: flex; flex-direction: column;
     align-items: center; justify-content: center; position: relative;
     margin-top: 0; padding-top: 0;
 }
-.hero-content { position: relative; z-index: 2; text-align: center; } 
+.hero-content { position: relative; z-index: 2; text-align: center; width: 100%; padding: 0 20px; } 
 .main-title { font-size: 5rem; margin-bottom: 20px; line-height: 1.1; color: transparent; text-shadow: none; position: relative; font-weight: 800; white-space: nowrap; }
 #title-wrapper { display: inline-block; position: relative; color: transparent; }
 #target-i { position: relative; display: inline-block; color: transparent; }
@@ -124,7 +129,7 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 .step-number {
     background: var(--primary-orange); color: #fff; width: 35px; height: 35px;
     border-radius: 50%; display: flex; align-items: center; justify-content: center;
-    font-weight: bold; margin-right: 15px; font-size: 1.1rem;
+    font-weight: bold; margin-right: 15px; font-size: 1.1rem; flex-shrink: 0;
 }
 
 /* Grilles d'options */
@@ -207,13 +212,39 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 @keyframes slideDown { from {transform: translateY(-50px);} to {transform: translateY(0);} }
 @keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
 
+/* --- RESPONSIVE MOBILE --- */
 @media (max-width: 768px) {
-    #hero h1 { font-size: 3rem; }
-    .text-block { font-size: 1.5rem; text-align: center !important; align-self: center !important; }
+    nav { padding: 0 20px; }
+    
+    .nav-links {
+        position: fixed;
+        top: 0; right: -100%; /* Caché à droite */
+        width: 80%; /* Prend 80% de la largeur */
+        height: 100vh;
+        background: rgba(0, 21, 28, 0.98);
+        flex-direction: column;
+        justify-content: center;
+        transition: 0.4s ease-in-out;
+        box-shadow: -5px 0 15px rgba(0,0,0,0.5);
+    }
+    .nav-links.active-menu { right: 0; } /* Classe ajoutée par JS pour ouvrir */
+    
+    .nav-links a { font-size: 1.5rem; height: auto; margin: 15px 0; }
+    .nav-links a::after { display: none; } /* Pas de soulignement au survol sur mobile */
+
+    .burger-menu { display: block; } /* Afficher le bouton burger */
+
+    #hero h1.main-title { font-size: 2.8rem; white-space: normal; } /* Titre plus petit et retour ligne */
+    .subtitle-hero { font-size: 1.2rem; padding: 0 20px; }
+    
+    .text-block { font-size: 1.3rem; text-align: center !important; }
     .cards-container { grid-template-columns: 1fr; gap: 30px; }
-    .nav-links { display: none; }
+    
     .services-grid, .pricing-grid, .options-grid { grid-template-columns: 1fr; }
-    .service-item, .option-card { width: 100%; max-width: 300px; margin: 0 auto; }
+    .service-item, .option-card { width: 100%; max-width: 100%; }
+    
     .total-bar { flex-direction: column; gap: 15px; padding: 15px; }
     .total-price { font-size: 1.8rem; }
+    
+    .modal-content { width: 95%; margin: 20% auto; padding: 30px 20px; }
 }
