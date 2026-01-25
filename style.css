@@ -101,29 +101,9 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 .services-grid { display: flex; flex-wrap: wrap; justify-content: center; gap: 30px; max-width: 1200px; margin: 0 auto; }
 .service-item { background: rgba(5, 59, 77, 0.4); border: 1px solid rgba(255, 255, 255, 0.05); padding: 30px; border-radius: 20px; width: 200px; text-align: center; transition: all 0.3s ease; backdrop-filter: blur(5px); }
 .service-item:hover { background: var(--primary-orange); transform: scale(1.05); box-shadow: 0 0 30px rgba(255, 107, 53, 0.4); border-color: transparent; }
+.service-item:hover i, .service-item:hover h4 { color: #fff; }
 .service-item i { font-size: 2.5rem; color: var(--primary-orange); margin-bottom: 20px; transition: 0.3s; }
 .service-item h4 { font-size: 1.1rem; font-weight: 600; color: #fff; }
-
-/* --- TARIFS (PRICING) --- */
-.pricing-section { padding-top: 50px; }
-.pricing-category { margin-bottom: 80px; }
-.pricing-category h3 { text-align: center; font-size: 2rem; color: #fff; margin-bottom: 40px; border-bottom: 2px solid var(--primary-orange); display: inline-block; padding-bottom: 10px; }
-.pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 30px; max-width: 1200px; margin: 0 auto; }
-
-.price-card { 
-    background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; 
-    padding: 30px; text-align: center; transition: 0.3s; display: flex; flex-direction: column; justify-content: space-between;
-}
-.price-card:hover { transform: scale(1.02); border-color: var(--primary-orange); box-shadow: 0 10px 30px rgba(0,0,0,0.3); }
-.price-card.featured { background: linear-gradient(145deg, rgba(255,107,53,0.1), rgba(0,0,0,0)); border: 1px solid var(--primary-orange); }
-
-.price-title { font-size: 1.4rem; font-weight: 700; color: var(--primary-orange); margin-bottom: 10px; text-transform: uppercase; }
-.price-amount { font-size: 2.5rem; font-weight: 800; color: #fff; margin-bottom: 20px; }
-.price-features { list-style: none; text-align: left; margin-bottom: 20px; color: #cfd8dc; font-size: 0.95rem; }
-.price-features li { margin-bottom: 8px; padding-left: 20px; position: relative; }
-.price-features li::before { content: '✓'; color: var(--primary-orange); position: absolute; left: 0; }
-
-.price-warning { text-align: center; color: #b0bec5; margin-top: 50px; font-style: italic; background: rgba(0,0,0,0.3); padding: 20px; border-radius: 10px; }
 
 /* --- PHOTOS (GALLERY) --- */
 .gallery-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px; padding: 20px 0; }
@@ -132,6 +112,81 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 .gallery-item:hover img { transform: scale(1.1); opacity: 1; }
 .gallery-item::after { content: 'Voir'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #fff; font-weight: bold; opacity: 0; transition: 0.3s; z-index: 2; background: var(--primary-orange); padding: 10px 20px; border-radius: 20px; }
 .gallery-item:hover::after { opacity: 1; }
+
+/* --- CALCULATEUR DE PRIX (TARIFS) --- */
+.calculator-container { max-width: 900px; margin: 0 auto; padding: 0 20px; }
+
+.calc-section {
+    background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+    border-radius: 20px; padding: 30px; margin-bottom: 30px; transition: 0.3s;
+}
+.calc-section h3 { font-size: 1.5rem; color: #fff; margin-bottom: 25px; display: flex; align-items: center; }
+.step-number {
+    background: var(--primary-orange); color: #fff; width: 35px; height: 35px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-weight: bold; margin-right: 15px; font-size: 1.1rem;
+}
+
+/* Grilles d'options */
+.options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+.small-grid { grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); }
+
+.option-card {
+    background: rgba(0, 0, 0, 0.3); border: 2px solid transparent; border-radius: 15px;
+    padding: 20px; text-align: center; cursor: pointer; transition: 0.2s all;
+    position: relative; overflow: hidden;
+}
+.option-card:hover { background: rgba(255, 255, 255, 0.05); }
+.option-card.selected, .option-card.selected-vehicle {
+    border-color: var(--primary-orange); background: rgba(255, 107, 53, 0.1);
+    box-shadow: 0 0 15px rgba(255, 107, 53, 0.2);
+}
+.option-card.selected::after { content: '✔'; position: absolute; top: 5px; right: 10px; color: var(--primary-orange); font-weight: bold; }
+
+.option-card i { font-size: 2rem; color: #b0bec5; margin-bottom: 10px; transition: 0.3s; }
+.option-card.selected i { color: var(--primary-orange); }
+.option-card h4 { font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
+.tiny-desc { font-size: 0.8rem; color: #78909c; }
+.price-tag { font-size: 1.2rem; font-weight: 700; color: var(--primary-orange); margin-top: 5px; }
+.features-list { text-align: left; margin-top: 10px; padding-left: 15px; font-size: 0.8rem; color: #cfd8dc; }
+
+/* Level Tabs */
+.level-tabs { display: flex; justify-content: center; gap: 10px; margin-bottom: 25px; flex-wrap: wrap; }
+.level-btn {
+    background: transparent; border: 1px solid rgba(255,255,255,0.2); color: #fff;
+    padding: 10px 20px; border-radius: 30px; cursor: pointer; font-family: inherit;
+    font-weight: 600; transition: 0.3s;
+}
+.level-btn:hover { border-color: var(--primary-orange); }
+.level-btn.active { background: var(--primary-orange); border-color: var(--primary-orange); color: #fff; }
+
+.pack-alert { text-align: center; margin-top: 15px; font-style: italic; font-size: 0.9rem; transition: 0.3s; }
+
+/* RECHERCHE VOITURE */
+.vehicle-search-wrapper {
+    position: relative; margin-bottom: 30px; max-width: 500px; margin-left: auto; margin-right: auto;
+}
+#car-input {
+    width: 100%; padding: 15px 20px 15px 50px; border-radius: 30px;
+    border: 1px solid rgba(255,255,255,0.2); background: rgba(0,0,0,0.3);
+    color: #fff; font-size: 1.1rem; font-family: 'Poppins', sans-serif;
+    outline: none; transition: 0.3s;
+}
+#car-input:focus { border-color: var(--primary-orange); box-shadow: 0 0 15px rgba(255, 107, 53, 0.3); }
+.search-icon { position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: #aaa; font-size: 1.2rem; }
+#car-feedback { margin-top: 10px; text-align: center; font-weight: 500; height: 20px; }
+
+/* Barre de Total Flottante */
+.total-bar {
+    position: fixed; bottom: 0; left: 0; width: 100%;
+    background: rgba(0, 21, 28, 0.95); border-top: 2px solid var(--primary-orange);
+    padding: 20px 50px; display: flex; justify-content: space-between; align-items: center;
+    backdrop-filter: blur(10px); z-index: 1000; box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
+    animation: slideUp 0.5s ease-out;
+}
+.total-content { font-size: 1.5rem; color: #fff; font-weight: 600; }
+.total-price { color: var(--primary-orange); font-size: 2.2rem; margin-left: 15px; font-weight: 800; }
+.btn-warm.small { font-size: 1rem; padding: 12px 30px; }
 
 /* --- CONTACT MODAL --- */
 .contact-card { background: linear-gradient(145deg, #052029, #001014); padding: 80px; border-radius: 40px; text-align: center; border: 1px solid rgba(255, 255, 255, 0.05); max-width: 800px; margin: 0 auto; }
@@ -150,198 +205,15 @@ section { min-height: 100vh; padding: 0 10%; display: flex; flex-direction: colu
 
 @keyframes fadeIn { from {opacity: 0;} to {opacity: 1;} }
 @keyframes slideDown { from {transform: translateY(-50px);} to {transform: translateY(0);} }
+@keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
 
 @media (max-width: 768px) {
     #hero h1 { font-size: 3rem; }
     .text-block { font-size: 1.5rem; text-align: center !important; align-self: center !important; }
     .cards-container { grid-template-columns: 1fr; gap: 30px; }
     .nav-links { display: none; }
-    .services-grid, .pricing-grid { flex-direction: column; align-items: center; }
-    .service-item, .price-card { width: 100%; max-width: 300px; }
-}
-
-/* --- CALCULATEUR DE PRIX (NEW) --- */
-.calculator-container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 20px;
-}
-
-.calc-section {
-    background: rgba(255, 255, 255, 0.03);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    padding: 30px;
-    margin-bottom: 30px;
-    transition: 0.3s;
-}
-.calc-section h3 {
-    font-size: 1.5rem;
-    color: #fff;
-    margin-bottom: 25px;
-    display: flex;
-    align-items: center;
-}
-.step-number {
-    background: var(--primary-orange);
-    color: #fff;
-    width: 35px;
-    height: 35px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    margin-right: 15px;
-    font-size: 1.1rem;
-}
-
-/* Grilles d'options */
-.options-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 20px;
-}
-.small-grid {
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-}
-
-.option-card {
-    background: rgba(0, 0, 0, 0.3);
-    border: 2px solid transparent;
-    border-radius: 15px;
-    padding: 20px;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.2s all;
-    position: relative;
-    overflow: hidden;
-}
-.option-card:hover {
-    background: rgba(255, 255, 255, 0.05);
-}
-.option-card.selected, .option-card.selected-vehicle {
-    border-color: var(--primary-orange);
-    background: rgba(255, 107, 53, 0.1);
-    box-shadow: 0 0 15px rgba(255, 107, 53, 0.2);
-}
-.option-card.selected::after {
-    content: '✔';
-    position: absolute;
-    top: 5px;
-    right: 10px;
-    color: var(--primary-orange);
-    font-weight: bold;
-}
-
-.option-card i {
-    font-size: 2rem;
-    color: #b0bec5;
-    margin-bottom: 10px;
-    transition: 0.3s;
-}
-.option-card.selected i { color: var(--primary-orange); }
-
-.option-card h4 { font-size: 1.1rem; color: #fff; margin-bottom: 5px; }
-.tiny-desc { font-size: 0.8rem; color: #78909c; }
-.price-tag { font-size: 1.2rem; font-weight: 700; color: var(--primary-orange); margin-top: 5px; }
-
-.features-list { text-align: left; margin-top: 10px; padding-left: 15px; font-size: 0.8rem; color: #cfd8dc; }
-
-/* Level Tabs (Basic, Avancé...) */
-.level-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin-bottom: 25px;
-    flex-wrap: wrap;
-}
-.level-btn {
-    background: transparent;
-    border: 1px solid rgba(255,255,255,0.2);
-    color: #fff;
-    padding: 10px 20px;
-    border-radius: 30px;
-    cursor: pointer;
-    font-family: inherit;
-    font-weight: 600;
-    transition: 0.3s;
-}
-.level-btn:hover { border-color: var(--primary-orange); }
-.level-btn.active { background: var(--primary-orange); border-color: var(--primary-orange); color: #fff; }
-
-.pack-alert {
-    text-align: center;
-    margin-top: 15px;
-    font-style: italic;
-    font-size: 0.9rem;
-    transition: 0.3s;
-}
-
-/* Barre de Total Flottante */
-.total-bar {
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    background: rgba(0, 21, 28, 0.95);
-    border-top: 2px solid var(--primary-orange);
-    padding: 20px 50px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    backdrop-filter: blur(10px);
-    z-index: 1000;
-    box-shadow: 0 -5px 30px rgba(0,0,0,0.5);
-    animation: slideUp 0.5s ease-out;
-}
-.total-content { font-size: 1.5rem; color: #fff; font-weight: 600; }
-.total-price { color: var(--primary-orange); font-size: 2.2rem; margin-left: 15px; font-weight: 800; }
-.btn-warm.small { font-size: 1rem; padding: 12px 30px; }
-
-@keyframes slideUp { from {transform: translateY(100%);} to {transform: translateY(0);} }
-
-@media (max-width: 768px) {
+    .services-grid, .pricing-grid, .options-grid { grid-template-columns: 1fr; }
+    .service-item, .option-card { width: 100%; max-width: 300px; margin: 0 auto; }
     .total-bar { flex-direction: column; gap: 15px; padding: 15px; }
     .total-price { font-size: 1.8rem; }
-    .options-grid { grid-template-columns: 1fr; }
-}
-
-
-.vehicle-search-wrapper {
-    position: relative;
-    margin-bottom: 30px;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-#car-input {
-    width: 100%;
-    padding: 15px 20px 15px 50px;
-    border-radius: 30px;
-    border: 1px solid rgba(255,255,255,0.2);
-    background: rgba(0,0,0,0.3);
-    color: #fff;
-    font-size: 1.1rem;
-    font-family: 'Poppins', sans-serif;
-    outline: none;
-    transition: 0.3s;
-}
-#car-input:focus {
-    border-color: var(--primary-orange);
-    box-shadow: 0 0 15px rgba(255, 107, 53, 0.3);
-}
-.search-icon {
-    position: absolute;
-    left: 20px;
-    top: 50%;
-    transform: translateY(-50%);
-    color: #aaa;
-    font-size: 1.2rem;
-}
-#car-feedback {
-    margin-top: 10px;
-    text-align: center;
-    font-weight: 500;
-    height: 20px;
 }
