@@ -13,13 +13,18 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav style="opacity: 1;">
+    <nav>
         <a href="index.html?intro=false" class="logo">CLEAN <span>MATHIS</span></a>
+        
+        <div class="burger-menu" onclick="toggleMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+
         <div class="nav-links">
             <a href="index.html?intro=false">Accueil</a>
             <a href="prestations.html">Prestations</a>
             <a href="tarifs.html">Tarifs</a>
-            <a href="photos.html" class="active">Photos</a>
+            <a href="photos.html">Photos</a>
             <a href="#" onclick="openModal(event)">Contact</a>
         </div>
     </nav>
@@ -63,3 +68,4 @@
     </script>
 </body>
 </html>
+
