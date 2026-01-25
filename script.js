@@ -10,67 +10,41 @@ const urlParams = new URLSearchParams(window.location.search);
 const skipIntro = urlParams.get('intro') === 'false';
 
 if (skipIntro) {
-    // ASTUCE MONDIRE : On injecte du CSS tout de suite pour cacher le loader
-    // avant même que le reste du site ne charge. Zéro flash.
     const style = document.createElement('style');
     style.innerHTML = '#loader-overlay { display: none !important; }';
     document.head.appendChild(style);
-    
-    // On nettoie l'URL pour que F5 relance l'anim
     window.history.replaceState({}, document.title, window.location.pathname);
 } else {
     window.scrollTo(0, 0);
 }
 
 // --- BASE DE DONNÉES GAGA XXL (Top 250+ France) ---
-// Classés par gabarit pour ton tarificateur
 const carDB = {
     citadine: [
-        // RENAULT / DACIA
         'clio', 'twingo', 'zoe', 'modus', 'wind', 'r5', 'sandero', 'spring',
-        // PEUGEOT / CITROEN / DS
         '208', '207', '206', '108', '107', '106', '205', 'ion', 'c3', 'c2', 'c1', 'ds3', 'ami', 'saxo', 'c-zero',
-        // VW GROUP
         'polo', 'up', 'lupo', 'fox', 'fabia', 'citigo', 'ibiza', 'mii', 'a1', 'a2',
-        // FIAT / ALFA / LANCIA
         '500', 'fiat 500', 'panda', 'punto', 'tipo', 'mito', 'ypsilon',
-        // FORD / OPEL
         'fiesta', 'ka', 'corsa', 'adam', 'karl', 'agila',
-        // TOYOTA / ASIATIQUES
         'yaris', 'aygo', 'iq', 'micra', 'swift', 'ignis', 'alto', 'celerio', 'splash', 'picanto', 'rio', 'i10', 'i20', 'jazz', 'colt', 'space star', 'mazda 2',
-        // AUTRES
         'mini', 'mini cooper', 'smart', 'fortwo', 'forfour'
     ],
     berline: [
-        // RENAULT
         'megane', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane',
-        // PEUGEOT / CITROEN / DS
         '308', '307', '306', '408', '508', '407', '406', '607', 'c4', 'c5', 'ds4', 'ds5', 'xsara', 'xantia', 'c-elysee', 'ds 4', 'ds 9',
-        // VW GROUP
         'golf', 'passat', 'arteon', 'jetta', 'bora', 'scirocco', 'beetle', 'coccinelle', 'id.3', 'leon', 'toledo', 'exeo', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'a4', 'a5', 'a6', 'a7', 'tt',
-        // BMW / MERCEDES
         'serie 1', 'serie 2', 'serie 3', 'serie 4', 'serie 5', 'classe a', 'classe c', 'classe e', 'cla', 'cls', 'classe b',
-        // FORD / OPEL
         'focus', 'mondeo', 'astra', 'insignia', 'vectra',
-        // TOYOTA / ASIATIQUES
         'corolla', 'auris', 'prius', 'avensis', 'camry', 'civic', 'accord', 'mazda 3', 'mazda 6', 'impreza', 'ceed', 'proced', 'i30', 'ioniq', 'elantra', 'i40', 'optima', 'stinger', 'pulsar', 'leaf',
-        // TESLA / AUTRES
         'model 3', 'model s', 'giulia', '147', '159', 'delta', 'xe', 'xf'
     ],
     suv: [
-        // RENAULT / DACIA
         'captur', 'arkana', 'austral', 'kadjar', 'koleos', 'scenic', 'espace', 'kangoo', 'duster', 'jogger', 'lodgy', 'dokker',
-        // PEUGEOT / CITROEN / DS
         '2008', '3008', '5008', '4008', 'rifter', 'partner', 'berlingo', 'c3 aircross', 'c4 aircross', 'c5 aircross', 'c4 cactus', 'picasso', 'c4 picasso', 'grand c4 picasso', 'c8', 'ds7', 'ds3 crossback', 'ds 3 crossback', 'ds 7',
-        // VW GROUP
         'tiguan', 't-roc', 't-cross', 'touareg', 'touran', 'sharan', 'caddy', 'multivan', 'q2', 'q3', 'q4', 'q5', 'q7', 'q8', 'ateca', 'arona', 'tarraco', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'enyaq', 'cupra formentor',
-        // BMW / MERCEDES
         'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'gla', 'glb', 'glc', 'gle', 'glk', 'vito', 'classe v',
-        // FORD / OPEL
         'kuga', 'puma', 'ecosport', 'edge', 'explorer', 'c-max', 's-max', 'galaxy', 'mokka', 'mokka x', 'crossland', 'grandland', 'zafira', 'meriva', 'antara',
-        // TOYOTA / ASIATIQUES
         'yaris cross', 'c-hr', 'rav4', 'highlander', 'land cruiser', 'bz4x', 'verso', 'qashqai', 'juke', 'x-trail', 'aria', 'tucson', 'kona', 'santa fe', 'bayon', 'sportage', 'niro', 'sorento', 'stonic', 'xceed', 'soul', 'cx-3', 'cx-30', 'cx-5', 'cr-v', 'hr-v', 'vitara', 's-cross', 'jimny',
-        // TESLA / AUTRES
         'model y', 'model x', '500x', '500l', 'renegade', 'compass', 'cherokee', 'evoque', 'velar', 'range rover', 'discovery', 'f-pace', 'e-pace', 'stelvio', 'tonale', 'macan', 'cayenne'
     ]
 };
@@ -313,15 +287,12 @@ function searchCar() {
     let found = null;
     let categoryName = "";
 
-    // Recherche dans la nouvelle base de données
     if(carDB.citadine.some(car => input.includes(car))) { found = 'citadine'; categoryName = "Citadine détectée !"; }
     else if(carDB.berline.some(car => input.includes(car))) { found = 'berline'; categoryName = "Berline détectée !"; }
     else if(carDB.suv.some(car => input.includes(car))) { found = 'suv'; categoryName = "SUV/4x4/Monospace détecté !"; }
 
     if(found) {
         feedback.innerHTML = `<span style="color:#4caf50; font-weight:bold;">✨ ${categoryName}</span>`;
-        
-        // On sélectionne la catégorie correspondante
         if(found === 'citadine') document.getElementById('default-vehicle').click();
         if(found === 'berline') document.getElementById('btn-berline').click();
         if(found === 'suv') document.getElementById('btn-suv').click();
@@ -329,3 +300,16 @@ function searchCar() {
         feedback.innerHTML = "<span style='color:#aaa;'>Modèle non reconnu, sélectionnez manuellement ci-dessous.</span>";
     }
 }
+
+// FONCTION MENU MOBILE
+function toggleMenu() {
+    const navLinks = document.querySelector('.nav-links');
+    navLinks.classList.toggle('active-menu');
+}
+
+// Fermer le menu si on clique sur un lien
+document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+        document.querySelector('.nav-links').classList.remove('active-menu');
+    });
+});
