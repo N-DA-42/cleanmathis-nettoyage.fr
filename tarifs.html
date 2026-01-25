@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clean Mathis - Tarifs & Devis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav style="opacity: 1;">
+        <a href="index.html?intro=false" class="logo">CLEAN <span>MATHIS</span></a>
+        <div class="nav-links">
+            <a href="index.html?intro=false">Accueil</a>
+            <a href="prestations.html">Prestations</a>
+            <a href="tarifs.html" class="active">Tarifs</a>
+            <a href="photos.html">Photos</a>
+            <a href="#" onclick="openModal(event)">Contact</a>
+        </div>
+    </nav>
+
+    <main style="padding-top: 120px; padding-bottom: 150px;">
+        
+        <div class="centered-content">
+            <h2 class="section-title">Simulateur de Tarif</h2>
+            <p>Configurez votre prestation sur mesure et obtenez une estimation immédiate.</p>
+        </div>
+
+        <div class="calculator-container">
+            
+            <div class="calc-section">
+                <h3><span class="step-number">1</span> Votre Véhicule</h3>
+                
+                <div class="vehicle-search-wrapper">
+                    <input type="text" id="car-input" placeholder="Entrez votre modèle (ex: Clio, Golf, 3008...)" onkeyup="searchCar()">
+                    <i class="fas fa-search search-icon"></i>
+                    <div id="car-feedback"></div>
+                </div>
+
+                <div class="options-grid vehicle-options">
+                    <div class="option-card" onclick="selectVehicle('citadine', this)" id="default-vehicle">
+                        <i class="fas fa-car-side"></i>
+                        <h4>Citadine</h4>
+                        <p class="tiny-desc">Ex: Clio, 208, Fiat 500</p>
+                    </div>
+                    <div class="option-card" onclick="selectVehicle('berline', this)" id="btn-berline">
+                        <i class="fas fa-car"></i>
+                        <h4>Berline / Compacte</h4>
+                        <p class="tiny-desc">Ex: Golf, Série 3, 308</p>
+                    </div>
+                    <div class="option-card" onclick="selectVehicle('suv', this)" id="btn-suv">
+                        <i class="fas fa-truck-pickup"></i>
+                        <h4>SUV / 4x4 / Break</h4>
+                        <p class="tiny-desc">Ex: 3008, X5, Tiguan</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-section">
+                <h3><span class="step-number">2</span> Nettoyage (Intérieur / Extérieur)</h3>
+                <div class="cleaning-selector">
+                    <div class="level-tabs">
+                        <button class="level-btn active" onclick="setLevel('basic', this)">BASIC</button>
+                        <button class="level-btn" onclick="setLevel('avancer', this)">AVANCÉ</button>
+                        <button class="level-btn" onclick="setLevel('pro', this)">PROFESSIONNEL</button>
+                    </div>
+
+                    <div class="options-grid">
+                        <div class="option-card selection-card" onclick="toggleOption('interieur', this)">
+                            <i class="fas fa-couch"></i>
+                            <h4>Intérieur</h4>
+                            <p class="price-tag" id="price-int">45€</p>
+                            <ul class="features-list" id="features-int">
+                                <li>Aspiration & Moquette</li>
+                                <li>Tableau de bord</li>
+                            </ul>
+                        </div>
+                        <div class="option-card selection-card" onclick="toggleOption('exterieur', this)">
+                            <i class="fas fa-shower"></i>
+                            <h4>Extérieur</h4>
+                            <p class="price-tag" id="price-ext">35€</p>
+                            <ul class="features-list" id="features-ext">
+                                <li>Lavage main</li>
+                                <li>Nettoyage vitres</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="pack-alert" id="pack-msg">Sélectionnez les deux pour activer la Formule Pack !</div>
+                </div>
+            </div>
+
+            <div class="calc-section">
+                <h3><span class="step-number">3</span> Esthétique & Rénovation</h3>
+                <div class="options-grid">
+                    <div class="option-card selection-card" onclick="togglePolissage('leger', this)">
+                        <i class="fas fa-magic"></i>
+                        <h4>Polissage Léger</h4>
+                        <p class="price-tag" id="price-polish-leger">250€</p>
+                        <p class="tiny-desc">Ravive la brillance (1 étape)</p>
+                    </div>
+                    <div class="option-card selection-card" onclick="togglePolissage('intermediaire', this)">
+                        <i class="fas fa-gem"></i>
+                        <h4>Polissage Intermédiaire</h4>
+                        <p class="price-tag" id="price-polish-inter">350€</p>
+                        <p class="tiny-desc">Supprime 80% défauts (2 étapes)</p>
+                    </div>
+                </div>
+
+                <div class="ceramic-wrapper" id="ceramic-section" style="opacity: 0.5; pointer-events: none; margin-top: 20px;">
+                    <h4><i class="fas fa-shield-alt"></i> Protection Céramique (Sur Polissage)</h4>
+                    <div class="options-grid">
+                        <div class="option-card selection-card" onclick="toggleCeramic(3, this)">
+                            <h4>3 Ans</h4>
+                            <p class="price-tag">+120€</p>
+                        </div>
+                        <div class="option-card selection-card" onclick="toggleCeramic(5, this)">
+                            <h4>5 Ans</h4>
+                            <p class="price-tag">+180€</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="calc-section">
+                <h3><span class="step-number">4</span> Options</h3>
+                <div class="options-grid small-grid">
+                    <div class="option-card selection-card" onclick="toggleOption('opt_dep_carr', this)">
+                        <h4>Déperlant Carrosserie</h4>
+                        <p class="price-tag">10€</p>
+                    </div>
+                    <div class="option-card selection-card" onclick="toggleOption('opt_dep_vitre', this)">
+                        <h4>Déperlant Vitres</h4>
+                        <p class="price-tag">15€</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="total-bar">
+            <div class="total-content">
+                <span>Estimation :</span>
+                <span class="total-price" id="total-display">0€</span>
+            </div>
+            <a href="#" onclick="openModal(event)" class="btn-warm small">Réserver ce tarif</a>
+        </div>
+
+    </main>
+
+    <div id="contact-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <div class="modal-icon"><i class="fas fa-envelope-open-text"></i></div>
+            <h2>Contactez-nous</h2>
+            <p>Mentionnez votre estimation lors de l'appel !</p>
+            <div class="modal-info"><i class="fas fa-phone-alt"></i> 06 51 64 90 49</div>
+            <div class="modal-info"><i class="fas fa-envelope"></i> cleanmathis@gmail.com</div>
+            <a href="tel:0651649049" class="btn-warm" style="margin-top: 20px;">Appeler Maintenant</a>
+        </div>
+    </div>
+
+    <script>
+        // --- BASE DE DONNÉES VOITURES (GAGA DB) ---
+        const carDB = {
+            citadine: ['clio', '208', 'c3', 'twingo', '500', 'fiat 500', 'polo', 'fiesta', 'yaris', 'zoe', 'sandero', 'micra', 'ibiza', 'fabia', 'corsa', 'i20', 'swift', 'a1', 'mini'],
+            berline: ['golf', '308', 'megane', 'a3', 'serie 1', 'classe a', 'leon', 'focus', 'astra', 'c4', 'octavia', 'model 3', 'civic', 'corolla', 'tipo', 'i30', 'ceed', 'serie 3', 'classe c', 'a4', 'passat', '508', 'talisman'],
+            suv: ['3008', '2008', 'captur', 'duster', 'tiguan', 't-roc', 'q3', 'x1', 'gla', 'x3', 'q5', 'kadjar', 'arkana', 'sportage', 'tucson', 'c5 aircross', 'ds7', 'model y', 'rav4', 'kuga', 'xc40', 'xc60', 'macan', 'cayenne', 'range rover']
+        };
+
+        function searchCar() {
+            const input = document.getElementById('car-input').value.toLowerCase().trim();
+            const feedback = document.getElementById('car-feedback');
+            
+            if(input.length < 2) {
+                feedback.innerHTML = "";
+                return;
+            }
+
+            let found = null;
+            let categoryName = "";
+
+            // Recherche
+            if(carDB.citadine.some(car => input.includes(car))) { found = 'citadine'; categoryName = "Citadine détectée !"; }
+            else if(carDB.berline.some(car => input.includes(car))) { found = 'berline'; categoryName = "Berline détectée !"; }
+            else if(carDB.suv.some(car => input.includes(car))) { found = 'suv'; categoryName = "SUV/4x4 détecté !"; }
+
+            if(found) {
+                // Feedback visuel
+                feedback.innerHTML = `<span style="color:#4caf50; font-weight:bold;">✨ ${categoryName}</span>`;
+                
+                // Clic automatique
+                if(found === 'citadine') document.getElementById('default-vehicle').click();
+                if(found === 'berline') document.getElementById('btn-berline').click();
+                if(found === 'suv') document.getElementById('btn-suv').click();
+            } else {
+                feedback.innerHTML = "<span style='color:#aaa;'>Modèle inconnu, veuillez sélectionner manuellement ci-dessous.</span>";
+            }
+        }
+
+        // --- RESTE DU JS CALCULATEUR ---
+        const prices = {
+            cleaning: {
+                basic: { int: 45, ext: 35, pack: 75 },
+                avancer: { int: 70, ext: 60, pack: 110 },
+                pro: { int: 90, ext: 80, pack: 160 }
+            },
+            polishing: {
+                leger: [250, 325, 400], 
+                intermediaire: [350, 475, 600]
+            },
+            ceramic: { 3: 120, 5: 180 },
+            options: { opt_dep_carr: 10, opt_dep_vitre: 15 }
+        };
+
+        const features = {
+            basic: { int: "Aspiration, moquette & tableau de bord", ext: "Lavage main & vitres" },
+            avancer: { int: "Basic + Ventilation & portes", ext: "Basic + Jantes & passages roues" },
+            pro: { int: "Avancé + Detailing complet", ext: "Avancé + Detailing complet" }
+        };
+
+        let state = {
+            vehicleIndex: 0, 
+            level: 'basic',
+            interieur: false,
+            exterieur: false,
+            polishing: null,
+            ceramic: null,
+            opt_dep_carr: false,
+            opt_dep_vitre: false
+        };
+
+        function selectVehicle(type, el) {
+            document.querySelectorAll('.vehicle-options .option-card').forEach(c => c.classList.remove('selected-vehicle'));
+            el.classList.add('selected-vehicle');
+            if(type === 'citadine') state.vehicleIndex = 0;
+            if(type === 'berline') state.vehicleIndex = 1;
+            if(type === 'suv') state.vehicleIndex = 2;
+            updatePolishingDisplay();
+            calculateTotal();
+        }
+
+        function setLevel(lvl, el) {
+            state.level = lvl;
+            document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+            el.classList.add('active');
+            document.getElementById('price-int').innerText = prices.cleaning[lvl].int + '€';
+            document.getElementById('price-ext').innerText = prices.cleaning[lvl].ext + '€';
+            document.getElementById('features-int').innerHTML = `<li>${features[lvl].int}</li>`;
+            document.getElementById('features-ext').innerHTML = `<li>${features[lvl].ext}</li>`;
+            calculateTotal();
+        }
+
+        function toggleOption(opt, el) {
+            state[opt] = !state[opt];
+            el.classList.toggle('selected');
+            calculateTotal();
+        }
+
+        function togglePolissage(type, el) {
+            if (state.polishing === type) {
+                state.polishing = null;
+                el.classList.remove('selected');
+                resetCeramic();
+            } else {
+                state.polishing = type;
+                const cards = el.parentElement.querySelectorAll('.option-card');
+                cards.forEach(c => c.classList.remove('selected'));
+                el.classList.add('selected');
+                document.getElementById('ceramic-section').style.opacity = '1';
+                document.getElementById('ceramic-section').style.pointerEvents = 'auto';
+            }
+            calculateTotal();
+        }
+
+        function toggleCeramic(years, el) {
+            if (state.ceramic === years) {
+                state.ceramic = null;
+                el.classList.remove('selected');
+            } else {
+                state.ceramic = years;
+                const cards = el.parentElement.querySelectorAll('.option-card');
+                cards.forEach(c => c.classList.remove('selected'));
+                el.classList.add('selected');
+            }
+            calculateTotal();
+        }
+
+        function resetCeramic() {
+            state.ceramic = null;
+            document.getElementById('ceramic-section').style.opacity = '0.5';
+            document.getElementById('ceramic-section').style.pointerEvents = 'none';
+            document.querySelectorAll('#ceramic-section .option-card').forEach(c => c.classList.remove('selected'));
+        }
+
+        function updatePolishingDisplay() {
+            document.getElementById('price-polish-leger').innerText = prices.polishing.leger[state.vehicleIndex] + '€';
+            document.getElementById('price-polish-inter').innerText = prices.polishing.intermediaire[state.vehicleIndex] + '€';
+        }
+
+        function calculateTotal() {
+            let total = 0;
+            if (state.interieur && state.exterieur) {
+                total += prices.cleaning[state.level].pack;
+                document.getElementById('pack-msg').style.opacity = '1';
+            } else {
+                if (state.interieur) total += prices.cleaning[state.level].int;
+                if (state.exterieur) total += prices.cleaning[state.level].ext;
+                document.getElementById('pack-msg').style.opacity = '0.5';
+            }
+            if (state.polishing) total += prices.polishing[state.polishing][state.vehicleIndex];
+            if (state.ceramic) total += prices.ceramic[state.ceramic];
+            if (state.opt_dep_carr) total += prices.options.opt_dep_carr;
+            if (state.opt_dep_vitre) total += prices.options.opt_dep_vitre;
+
+            animateValue(document.getElementById('total-display'), total);
+        }
+
+        function animateValue(obj, end) {
+            let start = parseInt(obj.innerHTML.replace('€', ''));
+            if (isNaN(start)) start = 0;
+            if (start === end) return;
+            let range = end - start;
+            let current = start;
+            let increment = end > start ? 1 : -1;
+            let stepTime = Math.abs(Math.floor(10 / (range / 10)));
+            if (Math.abs(range) > 50) { increment = end > start ? 5 : -5; stepTime = 10; }
+            let timer = setInterval(function() {
+                current += increment;
+                if ((increment > 0 && current >= end) || (increment < 0 && current <= end)) {
+                    current = end;
+                    clearInterval(timer);
+                }
+                obj.innerHTML = current + "€";
+            }, stepTime);
+        }
+
+        document.getElementById('default-vehicle').click(); // Init Citadine
+        
+        function openModal(e) { if(e) e.preventDefault(); document.getElementById('contact-modal').style.display = 'block'; }
+        function closeModal() { document.getElementById('contact-modal').style.display = 'none'; }
+        window.onclick = function(event) { if (event.target == document.getElementById('contact-modal')) closeModal(); }
+    </script>
+</body>
+</html>

@@ -4,15 +4,89 @@ const DOT_OFFSET_Y = -15;
 
 // RESET SCROLL
 if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
-window.scrollTo(0, 0);
 
-// --- DÉMARRAGE ---
+// --- LOGIQUE DE DÉMARRAGE ULTRA-RAPIDE (ANTI-FLASH) ---
+const urlParams = new URLSearchParams(window.location.search);
+const skipIntro = urlParams.get('intro') === 'false';
+
+if (skipIntro) {
+    // ASTUCE MONDIRE : On injecte du CSS tout de suite pour cacher le loader
+    // avant même que le reste du site ne charge. Zéro flash.
+    const style = document.createElement('style');
+    style.innerHTML = '#loader-overlay { display: none !important; }';
+    document.head.appendChild(style);
+    
+    // On nettoie l'URL pour que F5 relance l'anim
+    window.history.replaceState({}, document.title, window.location.pathname);
+} else {
+    window.scrollTo(0, 0);
+}
+
+// --- BASE DE DONNÉES GAGA XXL (Top 250+ France) ---
+// Classés par gabarit pour ton tarificateur
+const carDB = {
+    citadine: [
+        // RENAULT / DACIA
+        'clio', 'twingo', 'zoe', 'modus', 'wind', 'r5', 'sandero', 'spring',
+        // PEUGEOT / CITROEN / DS
+        '208', '207', '206', '108', '107', '106', '205', 'ion', 'c3', 'c2', 'c1', 'ds3', 'ami', 'saxo', 'c-zero',
+        // VW GROUP
+        'polo', 'up', 'lupo', 'fox', 'fabia', 'citigo', 'ibiza', 'mii', 'a1', 'a2',
+        // FIAT / ALFA / LANCIA
+        '500', 'fiat 500', 'panda', 'punto', 'tipo', 'mito', 'ypsilon',
+        // FORD / OPEL
+        'fiesta', 'ka', 'corsa', 'adam', 'karl', 'agila',
+        // TOYOTA / ASIATIQUES
+        'yaris', 'aygo', 'iq', 'micra', 'swift', 'ignis', 'alto', 'celerio', 'splash', 'picanto', 'rio', 'i10', 'i20', 'jazz', 'colt', 'space star', 'mazda 2',
+        // AUTRES
+        'mini', 'mini cooper', 'smart', 'fortwo', 'forfour'
+    ],
+    berline: [
+        // RENAULT
+        'megane', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane',
+        // PEUGEOT / CITROEN / DS
+        '308', '307', '306', '408', '508', '407', '406', '607', 'c4', 'c5', 'ds4', 'ds5', 'xsara', 'xantia', 'c-elysee', 'ds 4', 'ds 9',
+        // VW GROUP
+        'golf', 'passat', 'arteon', 'jetta', 'bora', 'scirocco', 'beetle', 'coccinelle', 'id.3', 'leon', 'toledo', 'exeo', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'a4', 'a5', 'a6', 'a7', 'tt',
+        // BMW / MERCEDES
+        'serie 1', 'serie 2', 'serie 3', 'serie 4', 'serie 5', 'classe a', 'classe c', 'classe e', 'cla', 'cls', 'classe b',
+        // FORD / OPEL
+        'focus', 'mondeo', 'astra', 'insignia', 'vectra',
+        // TOYOTA / ASIATIQUES
+        'corolla', 'auris', 'prius', 'avensis', 'camry', 'civic', 'accord', 'mazda 3', 'mazda 6', 'impreza', 'ceed', 'proced', 'i30', 'ioniq', 'elantra', 'i40', 'optima', 'stinger', 'pulsar', 'leaf',
+        // TESLA / AUTRES
+        'model 3', 'model s', 'giulia', '147', '159', 'delta', 'xe', 'xf'
+    ],
+    suv: [
+        // RENAULT / DACIA
+        'captur', 'arkana', 'austral', 'kadjar', 'koleos', 'scenic', 'espace', 'kangoo', 'duster', 'jogger', 'lodgy', 'dokker',
+        // PEUGEOT / CITROEN / DS
+        '2008', '3008', '5008', '4008', 'rifter', 'partner', 'berlingo', 'c3 aircross', 'c4 aircross', 'c5 aircross', 'c4 cactus', 'picasso', 'c4 picasso', 'grand c4 picasso', 'c8', 'ds7', 'ds3 crossback', 'ds 3 crossback', 'ds 7',
+        // VW GROUP
+        'tiguan', 't-roc', 't-cross', 'touareg', 'touran', 'sharan', 'caddy', 'multivan', 'q2', 'q3', 'q4', 'q5', 'q7', 'q8', 'ateca', 'arona', 'tarraco', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'enyaq', 'cupra formentor',
+        // BMW / MERCEDES
+        'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'gla', 'glb', 'glc', 'gle', 'glk', 'vito', 'classe v',
+        // FORD / OPEL
+        'kuga', 'puma', 'ecosport', 'edge', 'explorer', 'c-max', 's-max', 'galaxy', 'mokka', 'mokka x', 'crossland', 'grandland', 'zafira', 'meriva', 'antara',
+        // TOYOTA / ASIATIQUES
+        'yaris cross', 'c-hr', 'rav4', 'highlander', 'land cruiser', 'bz4x', 'verso', 'qashqai', 'juke', 'x-trail', 'aria', 'tucson', 'kona', 'santa fe', 'bayon', 'sportage', 'niro', 'sorento', 'stonic', 'xceed', 'soul', 'cx-3', 'cx-30', 'cx-5', 'cr-v', 'hr-v', 'vitara', 's-cross', 'jimny',
+        // TESLA / AUTRES
+        'model y', 'model x', '500x', '500l', 'renegade', 'compass', 'cherokee', 'evoque', 'velar', 'range rover', 'discovery', 'f-pace', 'e-pace', 'stelvio', 'tonale', 'macan', 'cayenne'
+    ]
+};
+
+// --- LE RESTE DU CODE (ANIMATIONS & SCROLL) ---
 let animationStarted = false;
 
 function safeStart() {
     if (animationStarted) return; 
     animationStarted = true;
-    setTimeout(playCinematicIntro, 100);
+
+    if (skipIntro) {
+        fastIntro();
+    } else {
+        setTimeout(playCinematicIntro, 100);
+    }
 }
 
 if (document.fonts && document.fonts.ready) {
@@ -22,33 +96,33 @@ if (document.fonts && document.fonts.ready) {
 }
 setTimeout(safeStart, 3000);
 
-
-// --- GPS ---
-function getTargetPosition() {
+function fastIntro() {
+    const loaderOverlay = document.getElementById("loader-overlay");
+    const titleWrapper = document.getElementById("title-wrapper");
     const targetI = document.getElementById("target-i");
-    if (!targetI) return { docX: 0, docY: 0, rect: { top:0, left:0, width:0 } };
+    const mainTitle = document.querySelector(".main-title");
+    const nav = document.querySelector("nav");
+    const subtitle = document.querySelector(".subtitle-hero");
+    const scrollDown = document.querySelector(".scroll-down");
 
-    const rect = targetI.getBoundingClientRect();
-    const scrollY = window.scrollY || window.pageYOffset;
+    if(loaderOverlay) loaderOverlay.style.display = 'none';
+    if(titleWrapper) titleWrapper.style.color = "#fff";
+    if(targetI) targetI.style.color = "#fff";
+    if(mainTitle) mainTitle.style.color = "#fff";
 
-    const docX = rect.left + (rect.width / 2) + DOT_OFFSET_X;
-    const docY = rect.top + scrollY + DOT_OFFSET_Y;
-
-    return { docX, docY, rect };
+    gsap.set([nav, subtitle, scrollDown], { opacity: 1, y: 0 });
+    initScrollSystem();
 }
 
-
 function playCinematicIntro() {
-    window.scrollTo(0, 0);
-
     const loaderText = document.getElementById("loader-text");
     const loaderCircle = document.getElementById("loader-circle");
     const loaderOverlay = document.getElementById("loader-overlay");
     const titleWrapper = document.getElementById("title-wrapper");
+    const targetI = document.getElementById("target-i");
     const mainTitle = document.querySelector(".main-title");
 
     gsap.delayedCall(2, () => {
-        // --- SETUP ---
         const startRectText = loaderText.getBoundingClientRect();
         const endRectTitle = titleWrapper.getBoundingClientRect();
         
@@ -64,24 +138,20 @@ function playCinematicIntro() {
         const endCenterY = endRectTitle.top + (endRectTitle.height / 2);
 
         gsap.set(cloneText, {
-            position: "fixed",
-            top: endRectTitle.top, left: endRectTitle.left, width: endRectTitle.width,
+            position: "fixed", top: endRectTitle.top, left: endRectTitle.left, width: endRectTitle.width,
             margin: 0, fontSize: window.getComputedStyle(titleWrapper.parentElement).fontSize,
             lineHeight: 1.1, fontWeight: 800, color: "#ffffff",
             zIndex: 10001, className: "clone-element", textAlign: "center",
             transformOrigin: "center center", 
             x: startCenterX - endCenterX, y: startCenterY - endCenterY,
-            scale: scaleRatio, textShadow: "0 0 20px #ff6b35, 0 0 40px #ff6b35",
-            pointerEvents: "none"
+            scale: scaleRatio, textShadow: "0 0 20px #ff6b35, 0 0 40px #ff6b35", pointerEvents: "none"
         });
 
         const startRectCircle = loaderCircle.getBoundingClientRect();
         const cloneCircle = loaderCircle.cloneNode(true);
         document.body.appendChild(cloneCircle);
-        
         gsap.set(cloneCircle, {
-            position: "fixed",
-            top: startRectCircle.top, left: startRectCircle.left,
+            position: "fixed", top: startRectCircle.top, left: startRectCircle.left,
             width: startRectCircle.width, height: startRectCircle.height,
             margin: 0, zIndex: 10002, className: "clone-element",
             border: "2px solid transparent", borderTopColor: "#ff6b35", borderRightColor: "#ff6b35",
@@ -92,13 +162,12 @@ function playCinematicIntro() {
         loaderCircle.style.opacity = 0;
         gsap.to(loaderOverlay, { backgroundColor: "transparent", duration: 1 });
 
-        // --- ANIMATION ---
         gsap.to(cloneText, { x: 0, y: 0, scale: 1, duration: 2, ease: "power3.inOut" });
         gsap.to(cloneText, {
             textShadow: "0 0 0px rgba(255, 107, 53, 0)", duration: 1.5, delay: 0.5, ease: "power2.out",
             onComplete: () => {
                 titleWrapper.style.color = "#fff";
-                document.getElementById("target-i").style.color = "#fff";
+                targetI.style.color = "#fff";
                 mainTitle.style.color = "#fff";
                 cloneText.remove();
             }
@@ -121,9 +190,8 @@ function playCinematicIntro() {
         });
 
         gsap.to(cloneCircle, { opacity: 0, duration: 1, delay: 1, ease: "power1.in" });
-        gsap.delayedCall(1.5, () => initScrollSystem(true));
+        gsap.delayedCall(1.5, () => initScrollSystem(true)); 
 
-        // UI
         const nav = document.querySelector("nav");
         const subtitle = document.querySelector(".subtitle-hero");
         const scrollDown = document.querySelector(".scroll-down");
@@ -132,10 +200,19 @@ function playCinematicIntro() {
     });
 }
 
+function getTargetPosition() {
+    const targetI = document.getElementById("target-i");
+    if (!targetI) return { docX: 0, docY: 0, rect: { top:0, left:0, width:0 } };
+    const rect = targetI.getBoundingClientRect();
+    const scrollY = window.scrollY || window.pageYOffset;
+    return { 
+        docX: rect.left + (rect.width / 2) + DOT_OFFSET_X, 
+        docY: rect.top + scrollY + DOT_OFFSET_Y, 
+        rect 
+    };
+}
 
-// --- SCROLL SYSTEM (Fix Trajectoire) ---
 let resizeObserver;
-
 function initScrollSystem(shouldFadeIn = false) {
     gsap.registerPlugin(ScrollTrigger, MotionPathPlugin);
 
@@ -165,20 +242,10 @@ function initScrollSystem(shouldFadeIn = false) {
         d += `C ${sx} ${dropY}, ${cx} ${sy + 50}, ${cx} ${dropY} `;
 
         if (width > 768) {
-            // CORRECTION DE LA COURBE ICI
-            // On s'assure que les points de contrôle ne sont pas trop violents
-            const sectionServices = document.querySelector('#services');
-            const sectionSolution = document.querySelector('#solution');
-
-            // On vérifie si les sections existent (sécurité)
-            const s1 = sectionServices ? sectionServices.offsetTop + 200 : height/3;
-            const s2 = sectionSolution ? sectionSolution.offsetTop : height/2;
-            
-            // Calcul d'une force de courbe adaptée à la distance
+            const s1 = document.querySelector('#services') ? document.querySelector('#services').offsetTop + 200 : height/3;
+            const s2 = document.querySelector('#solution') ? document.querySelector('#solution').offsetTop : height/2;
             const dist = s2 - s1; 
-            const curveStrength = Math.min(Math.abs(dist) / 2, 200); // Max 200px de poignée
-
-            // Courbe plus douce : On part du centre (cx), on va à gauche, puis on revient
+            const curveStrength = Math.min(Math.abs(dist) / 2, 200);
             d += `C ${cx} ${s1 - curveStrength}, ${width * 0.3} ${s1 - curveStrength}, ${width * 0.3} ${s1} `;
             d += `C ${width * 0.3} ${s1 + curveStrength}, ${cx} ${s2 - curveStrength}, ${cx} ${s2} `;
             d += `L ${cx} ${height} `;
@@ -231,4 +298,34 @@ function initScrollSystem(shouldFadeIn = false) {
         window.requestAnimationFrame(() => drawPath());
     });
     resizeObserver.observe(document.body);
+}
+
+// FONCTION RECHERCHE VOITURE
+function searchCar() {
+    const input = document.getElementById('car-input').value.toLowerCase().trim();
+    const feedback = document.getElementById('car-feedback');
+    
+    if(input.length < 2) {
+        feedback.innerHTML = "";
+        return;
+    }
+
+    let found = null;
+    let categoryName = "";
+
+    // Recherche dans la nouvelle base de données
+    if(carDB.citadine.some(car => input.includes(car))) { found = 'citadine'; categoryName = "Citadine détectée !"; }
+    else if(carDB.berline.some(car => input.includes(car))) { found = 'berline'; categoryName = "Berline détectée !"; }
+    else if(carDB.suv.some(car => input.includes(car))) { found = 'suv'; categoryName = "SUV/4x4/Monospace détecté !"; }
+
+    if(found) {
+        feedback.innerHTML = `<span style="color:#4caf50; font-weight:bold;">✨ ${categoryName}</span>`;
+        
+        // On sélectionne la catégorie correspondante
+        if(found === 'citadine') document.getElementById('default-vehicle').click();
+        if(found === 'berline') document.getElementById('btn-berline').click();
+        if(found === 'suv') document.getElementById('btn-suv').click();
+    } else {
+        feedback.innerHTML = "<span style='color:#aaa;'>Modèle non reconnu, sélectionnez manuellement ci-dessous.</span>";
+    }
 }
