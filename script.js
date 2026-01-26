@@ -20,35 +20,41 @@ if (skipIntro) {
 // --- BASE DE DONNÉES MASSIVE (+1000 MODÈLES) ---
 const carDB = {
     citadine: [
-        // FR
-        'clio', 'twingo', 'zoe', 'modus', 'wind', 'r5', 'super 5', 'sandero', 'spring', 'logan', '208', '207', '206', '108', '107', '106', '1007', '205', 'ion', 'c3', 'c2', 'c1', 'ds3', 'ami', 'saxo', 'ax', 'c-zero',
-        // ALL
-        'polo', 'up', 'lupo', 'fox', 'fabia', 'citigo', 'felicia', 'ibiza', 'mii', 'arosa', 'a1', 'a2', 'adam', 'karl', 'agila', 'tigra', 'corsa', 'fiesta', 'ka', 'smart', 'mini',
-        // IT
+        // RENAULT / DACIA
+        'clio', 'twingo', 'zoe', 'modus', 'wind', 'r5', 'super 5', 'sandero', 'spring', 'logan', 
+        // PEUGEOT / CITROEN / DS
+        '208', '207', '206', '108', '107', '106', '1007', '205', 'ion', 'c3', 'c2', 'c1', 'ds3', 'ami', 'saxo', 'ax', 'c-zero', 
+        // VW / SEAT / SKODA / AUDI
+        'polo', 'up', 'lupo', 'fox', 'fabia', 'citigo', 'felicia', 'ibiza', 'mii', 'arosa', 'a1', 'a2',
+        // FIAT / ALFA
         '500', 'panda', 'punto', 'mito', 'ypsilon', 'seicento', 'cinquecento', 'tipo', 'bravo',
-        // JAP/KOR
-        'yaris', 'aygo', 'iq', 'micra', 'pixo', 'swift', 'ignis', 'alto', 'celerio', 'splash', 'picanto', 'rio', 'i10', 'i20', 'getz', 'jazz', 'colt', 'space star', 'mazda 2', 'sirion', 'trevis', 'cuore'
+        // FORD / OPEL
+        'fiesta', 'ka', 'corsa', 'adam', 'karl', 'agila', 'tigra',
+        // JAP / KOR / AUTRES
+        'yaris', 'aygo', 'iq', 'micra', 'pixo', 'swift', 'ignis', 'alto', 'celerio', 'splash', 'picanto', 'rio', 'i10', 'i20', 'getz', 'jazz', 'colt', 'space star', 'mazda 2', 'mini', 'smart'
     ],
     berline: [
-        // FR
-        'megane', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane', 'vel satis', '308', '307', '306', '408', '508', '407', '406', '607', 'c4', 'c5', 'ds4', 'ds5', 'ds9', 'xsara', 'xantia', 'xm', 'c6', 'elysee',
-        // ALL
-        'golf', 'passat', 'arteon', 'jetta', 'bora', 'scirocco', 'beetle', 'id3', 'id4', 'id5', 'leon', 'toledo', 'exeo', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'a4', 'a5', 'a6', 'a7', 'a8', 'tt', 'serie 1', 'serie 2', 'serie 3', 'serie 4', 'serie 5', 'serie 6', 'serie 7', 'classe a', 'classe c', 'classe e', 'classe s', 'cla', 'cls', 'focus', 'mondeo', 'astra', 'insignia', 'vectra',
-        // JAP/KOR/US
-        'corolla', 'auris', 'prius', 'avensis', 'camry', 'civic', 'accord', 'mazda 3', 'mazda 6', 'impreza', 'ceed', 'i30', 'ioniq', 'elantra', 'i40', 'model 3', 'model s', 'giulia', '147', '156', '159', 'delta', 'xe', 'xf', 'xj'
+        // RENAULT / FR
+        'megane', 'talisman', 'laguna', 'fluence', 'latitude', 'safrane', 'vel satis', '308', '307', '306', '408', '508', '407', '406', '607', 'c4', 'c5', 'ds4', 'ds5', 'ds9', 'xsara', 'xantia', 'xm', 'c6',
+        // VW / ALL
+        'golf', 'passat', 'arteon', 'jetta', 'bora', 'scirocco', 'beetle', 'id3', 'leon', 'toledo', 'exeo', 'octavia', 'superb', 'rapid', 'scala', 'a3', 'a4', 'a5', 'a6', 'a7', 'tt', 'serie 1', 'serie 2', 'serie 3', 'serie 4', 'serie 5', 'classe a', 'classe c', 'classe e', 'cla', 'cls', 
+        // FORD / OPEL / TESLA
+        'focus', 'mondeo', 'astra', 'insignia', 'vectra', 'model 3', 'model s',
+        // JAP / KOR
+        'corolla', 'auris', 'prius', 'avensis', 'camry', 'civic', 'accord', 'mazda 3', 'mazda 6', 'impreza', 'ceed', 'i30', 'ioniq', 'elantra', 'giulia', '147', '156', '159', 'delta', 'xe', 'xf'
     ],
     suv: [
-        // FR
+        // RENAULT / FR
         'captur', 'arkana', 'austral', 'rafale', 'kadjar', 'koleos', 'scenic', 'espace', 'kangoo', 'duster', 'jogger', 'lodgy', 'dokker', '2008', '3008', '5008', '4008', 'rifter', 'partner', 'berlingo', 'c3 aircross', 'c5 aircross', 'ds7', 'ds3 crossback',
-        // ALL
-        'tiguan', 't-roc', 't-cross', 'touareg', 'touran', 'sharan', 'caddy', 'q2', 'q3', 'q5', 'q7', 'q8', 'ateca', 'arona', 'tarraco', 'formentor', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'gla', 'glb', 'glc', 'gle', 'gls', 'kuga', 'puma', 'ecosport', 'mokka', 'crossland', 'grandland', 'zafira', 'meriva',
-        // JAP/KOR/US
+        // VW / ALL
+        'tiguan', 't-roc', 't-cross', 'touareg', 'touran', 'sharan', 'caddy', 'q2', 'q3', 'q5', 'q7', 'q8', 'ateca', 'arona', 'tarraco', 'formentor', 'karoq', 'kodiaq', 'kamiq', 'yeti', 'x1', 'x2', 'x3', 'x4', 'x5', 'x6', 'gla', 'glb', 'glc', 'gle', 'kuga', 'puma', 'ecosport', 'mokka', 'crossland', 'grandland', 'zafira', 'meriva',
+        // JAP / KOR / TESLA
         'yaris cross', 'chr', 'rav4', 'highlander', 'qashqai', 'juke', 'xtrail', 'tucson', 'kona', 'santa fe', 'sportage', 'niro', 'sorento', 'stonic', 'cx3', 'cx30', 'cx5', 'vitara', 'model y', 'model x', 'renegade', 'compass', 'cherokee', 'evoque', 'velar', 'xc40', 'xc60', 'xc90'
     ]
 };
 
-// ... (Garde tout le reste du code d'animation et de scroll à l'identique) ...
-// Je te remets juste la fin avec le toggleMenu et la recherche
+// ... (GARDE LE RESTE DU FICHIER INCHANGÉ JUSQU'À LA FIN) ...
+// Je te remets juste les fonctions essentielles pour être sûr
 
 let animationStarted = false;
 function safeStart() { if (animationStarted) return; animationStarted = true; if (skipIntro) { fastIntro(); } else { setTimeout(playCinematicIntro, 100); } }
@@ -157,26 +163,17 @@ function initScrollSystem(shouldFadeIn = false) {
     resizeObserver.observe(document.body);
 }
 
-// FONCTION RECHERCHE VOITURE AMÉLIORÉE
+// FONCTION RECHERCHE VOITURE
 function searchCar() {
-    const input = document.getElementById('car-input').value.toLowerCase().trim().replace(/[-\s]/g, ''); // Nettoie la saisie (enlève tirets et espaces)
+    const input = document.getElementById('car-input').value.toLowerCase().trim().replace(/[-\s]/g, '');
     const feedback = document.getElementById('car-feedback');
-    
-    if(input.length < 2) {
-        feedback.innerHTML = "";
-        return;
-    }
-
+    if(input.length < 2) { feedback.innerHTML = ""; return; }
     let found = null;
     let categoryName = "";
-
-    // Fonction de recherche flexible
     const check = (list) => list.some(car => input.includes(car.replace(/[-\s]/g, '')) || car.replace(/[-\s]/g, '').includes(input));
-
     if(check(carDB.citadine)) { found = 'citadine'; categoryName = "Citadine détectée !"; }
     else if(check(carDB.berline)) { found = 'berline'; categoryName = "Berline détectée !"; }
     else if(check(carDB.suv)) { found = 'suv'; categoryName = "SUV/4x4/Monospace détecté !"; }
-
     if(found) {
         feedback.innerHTML = `<span style="color:#4caf50; font-weight:bold;">✨ ${categoryName}</span>`;
         if(found === 'citadine') document.getElementById('default-vehicle').click();
@@ -187,13 +184,11 @@ function searchCar() {
     }
 }
 
-// FONCTION MENU MOBILE (BURGER)
+// MENU MOBILE TOGGLE
 function toggleMenu() {
     const navLinks = document.querySelector('.nav-links');
     navLinks.classList.toggle('active-menu');
 }
-
-// FERMETURE AUTOMATIQUE
 document.querySelectorAll('.nav-links a').forEach(link => {
     link.addEventListener('click', () => {
         document.querySelector('.nav-links').classList.remove('active-menu');
